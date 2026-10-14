@@ -2,6 +2,7 @@
 from functools import lru_cache
 from fractions import Fraction
 import hashlib
+import io
 import json
 import os
 from pathlib import Path
@@ -88,6 +89,11 @@ def binary(name):
     if configured:
         require(Path(configured).is_file(), f"配置的 {name} 不存在")
         return str(Path(configured).resolve())
+    from app_runtime import bundled, resource_root
+    if bundled():
+        packaged = resource_root()/'vendor/ffmpeg'/f'{name}.exe'
+        require(packaged.is_file(), '视频组件不完整，请重新完整解压 Release 下载包（包含 _internal 文件夹）')
+        return str(packaged)
     found = shutil.which(name)
     if found:
         return found
@@ -286,8 +292,12 @@ def extract(path, kind, position, output):
             require(not getattr(im, "is_animated", False), "动画图片暂不能建立静态位置")
             ImageOps.exif_transpose(im).convert("RGBA").save(output, "PNG")
     else:
-        run("ffmpeg", ["-v", "error", "-y", "-noautorotate", "-i", path, "-map", f"0:{position['stream_index']}",
-                       "-vf", f"select=eq(n\\,{position['presentation_ordinal0']})", "-frames:v", "1", "-fps_mode", "passthrough", output], timeout=600)
+        # Raw TIFF preserves pixels/alpha without requiring FFmpeg's optional zlib/PNG codec.
+        raw = run("ffmpeg", ["-v", "error", "-noautorotate", "-i", path, "-map", f"0:{position['stream_index']}",
+                       "-vf", f"select=eq(n\\,{position['presentation_ordinal0']})", "-frames:v", "1", "-fps_mode", "passthrough",
+                       "-pix_fmt", "rgba", "-c:v", "tiff", "-compression_algo", "raw", "-f", "image2pipe", "pipe:1"], timeout=600)
+        with Image.open(io.BytesIO(raw)) as im:
+            im.save(output, "PNG")
     require(output.is_file() and output.stat().st_size > 0, "未能生成所请求的画面")
     with Image.open(output) as im:
         im.load()
@@ -295,6 +305,9 @@ def extract(path, kind, position, output):
 
 
 def proxy(path, stream, output):
+    from app_runtime import bundled
+    encoding = (["-c:v", "libopenh264", "-b:v", "2M"] if bundled() else
+                ["-c:v", "libx264", "-preset", "veryfast", "-crf", "24"])
     run("ffmpeg", ["-v", "error", "-y", "-noautorotate", "-i", path, "-map", f"0:{stream}", "-an", "-vf", "scale=960:-2:force_original_aspect_ratio=decrease,setpts=PTS-STARTPTS", "-fps_mode", "vfr",
-                   "-c:v", "libx264", "-preset", "veryfast", "-crf", "24", "-pix_fmt", "yuv420p", "-movflags", "+faststart", output], timeout=1800)
+                   *encoding, "-pix_fmt", "yuv420p", "-movflags", "+faststart", output], timeout=1800)
     require(output.is_file(), "播放代理生成失败")

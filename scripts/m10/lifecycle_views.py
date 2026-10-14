@@ -257,7 +257,8 @@ class LifecycleViews:
     def train(self):
         sid=self.selected_snapshot();win=tk.Toplevel(self.host);win.title('按所选快照训练');win.geometry('570x430')
         box=dialog_form(win)
-        runtime=ttk.Combobox(box,values=self.context.models.runtimes());runtime.set(self.context.models.runtimes()[0])
+        choices=self.context.models.runtimes()
+        runtime=ttk.Combobox(box,values=choices);runtime.set(choices[0] if choices else '')
         self.host.field(box,'现有 Python 训练环境',runtime)
         values={}
         for key,title,default in [('epochs','训练轮数',20),('image_size','输入尺寸',224),('batch','每批图片',4),('device','设备（cpu 或 0）','cpu')]:

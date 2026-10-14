@@ -23,11 +23,22 @@ class ModelWorkflow:
         self.root = self.library.root/'models'
 
     def runtimes(self):
+        from app_runtime import bundled
         project = self.context.project
         choices = [os.environ.get('POSE_AI_PYTHON'),
                    str(project/'experiments/direction_expanded_20261009/.yolo-venv/Scripts/python.exe'),
-                   str(project/'experiments/direction_expanded_20261009/.venv/Scripts/python.exe'), sys.executable]
+                   str(project/'experiments/direction_expanded_20261009/.venv/Scripts/python.exe'),
+                   None if bundled() else sys.executable]
         return list(dict.fromkeys(str(Path(p).resolve()) for p in choices if p and Path(p).is_file()))
+
+    def select_runtime(self, runtime=None):
+        from app_runtime import bundled
+        choices = self.runtimes()
+        chosen = runtime or (choices[0] if choices else None)
+        require(chosen, 'AI 训练和预测是可选功能。请先配置含模型依赖的 Python 环境，并设置 POSE_AI_PYTHON；手动标注和搜索无需此步骤。')
+        require(not bundled() or Path(chosen).resolve() != Path(sys.executable).resolve(),
+                '请选择 Python 解释器，不能把 M10 程序当作 AI 运行环境')
+        return str(Path(chosen).resolve())
 
     def register(self, path, backend, *, profiles=None, point_order=None, directions=None, forms=None, actor='本机用户'):
         path=Path(path).resolve()
@@ -194,7 +205,7 @@ class ModelWorkflow:
                 require(c['decision']!='excluded','已排除画面不参与检测，请先改为待判断或保留')
                 p=self.sources.cached_image(c['position_id'])
                 inputs.append({'id':cid,'revision':c['revision'],'path':str(p),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()})
-        request={'operation':'predict','model':spec,'inputs':inputs,'runtime':runtime or self.runtimes()[0]}
+        request={'operation':'predict','model':spec,'inputs':inputs,'runtime':self.select_runtime(runtime)}
         return self.sources.queue('predict',request,'predict:'+fingerprint(request))
 
     def queue_train(self, snapshot_id, *, runtime=None, epochs=20, image_size=224, batch=4, device='cpu', seed=17):
@@ -204,12 +215,12 @@ class ModelWorkflow:
         package=self.context.training.materialize(snapshot_id)
         require(any(e['split']=='train' for e in package['records']) and any(e['split']=='validation' for e in package['records']),
                 '需要分组独立的训练和验证图片；不能把训练集自动当验证集')
-        request={'operation':'train','package':package,'runtime':runtime or self.runtimes()[0],
+        request={'operation':'train','package':package,'runtime':self.select_runtime(runtime),
                  'epochs':epochs,'image_size':image_size,'batch':batch,'device':device,'seed':seed}
         return self.sources.queue('train',request,'train:'+fingerprint(request))
 
     def execute(self, request, jid):
-        runtime=Path(request['runtime'])
+        runtime=Path(self.select_runtime(request['runtime']))
         require(runtime.is_file(),'所选训练解释器不存在')
         out=self.library.root/'jobs'/jid;out.mkdir(parents=True,exist_ok=True)
         payload={**request,'output_dir':str(out),'project':str(self.context.project)}

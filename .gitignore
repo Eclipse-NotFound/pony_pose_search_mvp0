@@ -51,3 +51,7 @@ logs/
 .env
 .env.*
 !.env.example
+
+# Windows release build output
+/build/
+/dist/

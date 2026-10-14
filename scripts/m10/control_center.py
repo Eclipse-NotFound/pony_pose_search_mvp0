@@ -6,8 +6,9 @@ import sys
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(getattr(sys, '_MEIPASS', Path(__file__).resolve().parents[2]))
 sys.path[:0] = [str(ROOT/'scripts/common'), str(ROOT/'scripts/m10')]
+from app_runtime import default_library, remember_library
 from workflow import ProjectContext, MODULES
 from native_workbench import NativeWorkbench
 from ui_components import install_theme
@@ -19,6 +20,7 @@ class ControlCenter:
         self.project = Path(project_root or ROOT).resolve()
         self.project_context = None
         self.native_workbench = None
+        self.startup_check = startup_check
         install_theme(root)
         root.title('Pony Pose Search · M10')
         root.geometry('1380x880')
@@ -36,7 +38,7 @@ class ControlCenter:
     def open_library(self, path):
         if self.native_workbench:
             self.native_workbench.clean()
-        context = ProjectContext(self.project, path)
+        context = ProjectContext(self.project, path if path is not None else default_library(self.project))
         try:
             view = NativeWorkbench(self.root, self.project, context=context)
         except Exception:
@@ -50,6 +52,8 @@ class ControlCenter:
         view.on_change = self._refresh_all_status
         view.pack(fill='both', expand=True)
         self._refresh_all_status()
+        if not self.startup_check:
+            remember_library(context.library.root)
 
     def choose_library(self):
         try:

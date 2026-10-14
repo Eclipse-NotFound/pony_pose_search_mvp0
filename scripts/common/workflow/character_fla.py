@@ -54,7 +54,8 @@ class AnimateRenderer:
     termination. A timeout leaves the request for reconciliation, never kills An.
     """
     def __init__(self, project):
-        self.state_root = Path(project)/'.probe/character-fla-runtime'
+        from app_runtime import working_root
+        self.state_root = working_root(project)/'.probe/character-fla-runtime'
 
     def status(self):
         configured = os.environ.get('PONY_ANIMATE')
