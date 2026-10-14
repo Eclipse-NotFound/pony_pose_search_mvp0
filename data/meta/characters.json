@@ -1,0 +1,10 @@
+{
+  "version": "characters_v1",
+  "characters": {
+    "twilight_unicorn": {
+      "display_name_zh": "暮光闪闪（独角兽状态）",
+      "display_name_en": "Twilight Sparkle Unicorn",
+      "species_type": "unicorn"
+    }
+  }
+}

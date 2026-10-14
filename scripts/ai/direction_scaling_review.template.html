@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>200张新增标注 · 逐张查看</title>
+<style>
+:root{color-scheme:light dark;--bg:light-dark(#f7f7f4,#17191b);--fg:light-dark(#20262b,#e8ecee);--line:light-dark(#c9cece,#515b60)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,'Microsoft YaHei',sans-serif}main{max-width:1120px;margin:auto;padding:24px}h1{font-size:25px;font-weight:600;margin:0 0 8px}p{margin:8px 0 18px}button,select,input{font:inherit;color:inherit}button,select{min-height:42px;background:transparent;border:1px solid var(--line);border-radius:5px;padding:7px 12px}button{cursor:pointer}button:disabled{opacity:.4;cursor:default}label{display:flex;align-items:center;gap:8px}.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:18px 0}.controls select{max-width:100%}.stage{display:grid;grid-template-columns:minmax(0,2fr) minmax(230px,1fr);gap:24px;align-items:start}.picture{position:relative;width:100%;background:light-dark(#e3e5e5,#24282a)}.picture img{display:block;width:100%;max-height:670px;object-fit:contain}.picture svg{position:absolute;inset:0;width:100%;height:100%}#note{white-space:pre-wrap}#details{font-variant-numeric:tabular-nums}.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:14px}.legend span{border-bottom:3px solid var(--c)}details{margin:18px 0}table{border-collapse:collapse;width:100%;font-size:14px}td,th{text-align:left;padding:4px 6px;border-bottom:1px solid var(--line)}th{font-weight:500}#status{font-size:14px}a{color:inherit}#frame-id{overflow-wrap:anywhere;font-size:14px}#image-status{min-height:1.6em}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+@media(max-width:680px){main{padding:16px}.stage{grid-template-columns:1fr}.controls select{flex-basis:100%;width:100%}h1{font-size:21px}.picture img{max-height:520px}}
+</style>
+</head>
+<body><main>
+<h1>200张新增标注 · 逐张查看</h1>
+<p>AI逐图标注，尚待你审核。尾巴箭头表示离开身体的初始朝向；无法判断的部位留空。</p>
+<div class="controls">
+<button id="previous" type="button">上一张</button>
+<select id="frame-select" aria-label="选择图片"></select>
+<button id="next" type="button">下一张</button>
+<label><input id="overlay" type="checkbox" checked>显示标注</label>
+<label><input id="numbers" type="checkbox">点位编号</label>
+</div>
+<div class="stage">
+<div><div class="picture"><img id="photo" alt="新增训练图片"><svg id="drawing" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="方向与点位标注"></svg></div><div id="image-status" role="status" aria-live="polite"></div></div>
+<div><div id="status" aria-live="polite"></div><div id="frame-id"></div><p id="note"></p>
+<div class="legend"><span style="--c:#1789fb">头</span><span style="--c:#14b7c6">颈</span><span style="--c:#e4b015">身体／尾巴</span><span style="--c:#19b257">前腿1</span><span style="--c:#ff8718">前腿2</span><span style="--c:#c91baa">后腿1</span><span style="--c:#1ab5d2">后腿2</span></div>
+<details><summary>查看点位坐标</summary><table><thead><tr><th>点位</th><th>图宽%</th><th>图高%</th></tr></thead><tbody id="details"></tbody></table></details>
+<p><a id="original" target="_blank" rel="noopener">打开原尺寸图片</a></p>
+<p id="subset"></p>
+</div></div>
+<script type="application/json" id="review-data">__DATA__</script>
+<script>
+(()=>{'use strict';
+const data=JSON.parse(document.getElementById('review-data').textContent),frames=data.frames;
+const $=id=>document.getElementById(id),select=$('frame-select'),svg=$('drawing'),photo=$('photo');
+const colors=['#1789fb','#14b7c6','#e4b015','#e4b015','#19b257','#19b257','#ff8718','#ff8718','#c91baa','#c91baa','#c91baa','#1ab5d2','#1ab5d2','#1ab5d2'];
+const ns='http://www.w3.org/2000/svg';let index=0;
+for(let i=0;i<frames.length;i++){const o=document.createElement('option');o.value=String(i);o.textContent=(i+1)+' / 200 · 第15集 '+frames[i].time;select.append(o)}
+function add(tag,attrs){const el=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))el.setAttribute(k,String(v));svg.append(el);return el}
+function draw(){const f=frames[index],w=f.size[0],h=f.size[1];svg.replaceChildren();svg.setAttribute('viewBox','0 0 '+w+' '+h);svg.style.display=$('overlay').checked?'block':'none';
+const unit=Math.max(w,h)/400;
+for(let k=0;k<data.edges.length;k++){const [a,b]=data.edges[k],p=f.points[a],q=f.points[b];if(!p||!q)continue;const dx=q[0]-p[0],dy=q[1]-p[1],n=Math.hypot(dx,dy);if(n===0)continue;const ux=dx/n,uy=dy/n,tip=5*unit;add('line',{x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:colors[k],'stroke-width':2.1*unit});add('path',{d:`M ${q[0]-tip*ux+tip*.48*uy} ${q[1]-tip*uy-tip*.48*ux} L ${q[0]} ${q[1]} L ${q[0]-tip*ux-tip*.48*uy} ${q[1]-tip*uy+tip*.48*ux}`,fill:'none',stroke:colors[k],'stroke-width':1.7*unit});}
+if($('numbers').checked)f.points.forEach((p,j)=>{if(!p)return;add('circle',{cx:p[0],cy:p[1],r:2.6*unit,fill:'#ffffff',stroke:'#111111','stroke-width':unit});const text=add('text',{x:p[0]+4*unit,y:p[1]-4*unit,fill:'#ffffff',stroke:'#111111','stroke-width':2*unit,'paint-order':'stroke','font-size':11*unit,'font-family':'sans-serif'});text.textContent=j+1});}
+function show(i){index=Math.max(0,Math.min(frames.length-1,i));const f=frames[index];select.value=String(index);$('previous').disabled=index===0;$('next').disabled=index===frames.length-1;photo.src=f.image;photo.alt='第15集 '+f.time+' 暮光闪闪';$('status').textContent=(index+1)+' / 200 · 待审核 · '+f.directions+'个方向';$('frame-id').textContent=f.id;$('note').textContent=f.note;$('subset').textContent=f.middle?'用于203张与303张两档训练':'仅加入303张训练档';$('original').href=f.original;$('image-status').textContent='';
+$('details').replaceChildren();f.points.forEach((p,j)=>{const row=document.createElement('tr');const cells=[(j+1)+' '+data.pointNames[j],p?(p[0]/f.size[0]*100).toFixed(1):'未标',p?(p[1]/f.size[1]*100).toFixed(1):'未标'];for(const v of cells){const c=document.createElement('td');c.textContent=v;row.append(c)}$('details').append(row)});draw();}
+photo.onerror=()=>{$('image-status').textContent='图片未能加载。请保持本页与项目文件的位置关系。'};
+select.addEventListener('change',()=>show(Number(select.value)));$('previous').addEventListener('click',()=>show(index-1));$('next').addEventListener('click',()=>show(index+1));$('overlay').addEventListener('change',draw);$('numbers').addEventListener('change',draw);
+document.addEventListener('keydown',e=>{if(['SELECT','INPUT'].includes(e.target.tagName))return;if(e.key==='ArrowRight')show(index+1);if(e.key==='ArrowLeft')show(index-1)});show(0);
+})();
+</script>
+</main></body></html>

@@ -1,0 +1,2688 @@
+{
+  "bundle_version": "multispecies_design_20261011_v1",
+  "status": "design_proposal_not_runtime_migration",
+  "catalog": {
+    "characters": [
+      {
+        "id": "twilight_sparkle",
+        "label": "暮光闪闪"
+      },
+      {
+        "id": "example_griffon",
+        "label": "狮鹫示例角色"
+      },
+      {
+        "id": "example_dragon",
+        "label": "龙示例角色"
+      },
+      {
+        "id": "example_hybrid",
+        "label": "混合身体示例角色"
+      }
+    ],
+    "species": [
+      {
+        "id": "pony",
+        "label": "小马"
+      },
+      {
+        "id": "griffon",
+        "label": "狮鹫"
+      },
+      {
+        "id": "dragon",
+        "label": "龙"
+      },
+      {
+        "id": "mixed_unspecified",
+        "label": "混合，未细分"
+      }
+    ],
+    "forms": [
+      {
+        "id": "twilight.unicorn@1",
+        "character_ref": "twilight_sparkle",
+        "species_ref": "pony",
+        "profile_ref": "pony.quadruped@2draft1",
+        "expected_presence": {
+          "wing_a": "absent",
+          "wing_b": "absent"
+        },
+        "status": "design_example"
+      },
+      {
+        "id": "twilight.alicorn@1",
+        "character_ref": "twilight_sparkle",
+        "species_ref": "pony",
+        "profile_ref": "pony.quadruped@2draft1",
+        "expected_presence": {
+          "wing_a": "present",
+          "wing_b": "present"
+        },
+        "status": "design_example"
+      },
+      {
+        "id": "example.griffon@1",
+        "character_ref": "example_griffon",
+        "species_ref": "griffon",
+        "profile_ref": "griffon.quadruped@draft1",
+        "expected_presence": {
+          "wing_a": "present",
+          "wing_b": "present"
+        },
+        "status": "design_example"
+      },
+      {
+        "id": "example.dragon@1",
+        "character_ref": "example_dragon",
+        "species_ref": "dragon",
+        "profile_ref": "dragon.biped@draft1",
+        "expected_presence": {
+          "wing_a": "present",
+          "wing_b": "present"
+        },
+        "status": "design_example"
+      },
+      {
+        "id": "example.hybrid@1",
+        "character_ref": "example_hybrid",
+        "species_ref": "mixed_unspecified",
+        "profile_ref": "hybrid.asymmetric@draft1",
+        "expected_presence": {
+          "wing_a": "present",
+          "wing_b": "present"
+        },
+        "status": "design_example"
+      }
+    ],
+    "modules": [
+      {
+        "id": "pony.core@1",
+        "label": "小马头颈、躯干、尾根",
+        "status": "legacy_equivalent",
+        "directions": [
+          {
+            "key": "head",
+            "definition_ref": "pony.core@1/head",
+            "from_semantic": "头部中心",
+            "to_semantic": "头部朝向参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "legacy_equivalent"
+          },
+          {
+            "key": "neck",
+            "definition_ref": "pony.core@1/neck",
+            "from_semantic": "前躯连接中心",
+            "to_semantic": "颈部朝向参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "legacy_equivalent"
+          },
+          {
+            "key": "body",
+            "definition_ref": "pony.core@1/body",
+            "from_semantic": "前躯连接中心",
+            "to_semantic": "后躯连接中心",
+            "coordinate_space": "image_2d",
+            "rule_status": "legacy_equivalent"
+          },
+          {
+            "key": "tail",
+            "definition_ref": "pony.core@1/tail",
+            "from_semantic": "尾部连接区域",
+            "to_semantic": "尾巴向外初始朝向参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "legacy_equivalent"
+          }
+        ]
+      },
+      {
+        "id": "pony.fore@1",
+        "label": "小马前腿：2段",
+        "status": "legacy_equivalent",
+        "directions": [
+          {
+            "key": "upper",
+            "definition_ref": "pony.fore@1/upper",
+            "from_semantic": "连接区域中间",
+            "to_semantic": "转折参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "legacy_equivalent"
+          },
+          {
+            "key": "lower",
+            "definition_ref": "pony.fore@1/lower",
+            "from_semantic": "转折参考",
+            "to_semantic": "末端参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "legacy_equivalent"
+          }
+        ]
+      },
+      {
+        "id": "pony.hind@1",
+        "label": "小马后腿：3段",
+        "status": "legacy_equivalent",
+        "directions": [
+          {
+            "key": "upper",
+            "definition_ref": "pony.hind@1/upper",
+            "from_semantic": "连接区域中间",
+            "to_semantic": "上转折参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "legacy_equivalent"
+          },
+          {
+            "key": "middle",
+            "definition_ref": "pony.hind@1/middle",
+            "from_semantic": "上转折参考",
+            "to_semantic": "下转折参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "legacy_equivalent"
+          },
+          {
+            "key": "lower",
+            "definition_ref": "pony.hind@1/lower",
+            "from_semantic": "下转折参考",
+            "to_semantic": "末端参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "legacy_equivalent"
+          }
+        ]
+      },
+      {
+        "id": "griffon.core@draft1",
+        "label": "狮鹫头颈、躯干、尾根",
+        "status": "draft",
+        "directions": [
+          {
+            "key": "head",
+            "definition_ref": "griffon.core@draft1/head",
+            "from_semantic": "头部中心",
+            "to_semantic": "头部朝向参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          },
+          {
+            "key": "neck",
+            "definition_ref": "griffon.core@draft1/neck",
+            "from_semantic": "前躯连接中心",
+            "to_semantic": "颈部朝向参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          },
+          {
+            "key": "body",
+            "definition_ref": "griffon.core@draft1/body",
+            "from_semantic": "前躯连接中心",
+            "to_semantic": "后躯连接中心",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          },
+          {
+            "key": "tail",
+            "definition_ref": "griffon.core@draft1/tail",
+            "from_semantic": "尾部连接区域",
+            "to_semantic": "尾巴向外初始朝向参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          }
+        ]
+      },
+      {
+        "id": "claw.fore@draft1",
+        "label": "爪形前肢：示例2段",
+        "status": "draft",
+        "directions": [
+          {
+            "key": "upper",
+            "definition_ref": "claw.fore@draft1/upper",
+            "from_semantic": "连接区域中间",
+            "to_semantic": "转折参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          },
+          {
+            "key": "lower",
+            "definition_ref": "claw.fore@draft1/lower",
+            "from_semantic": "转折参考",
+            "to_semantic": "末端参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          }
+        ]
+      },
+      {
+        "id": "feline.hind@draft1",
+        "label": "兽形后肢：示例3段",
+        "status": "draft",
+        "directions": [
+          {
+            "key": "upper",
+            "definition_ref": "feline.hind@draft1/upper",
+            "from_semantic": "连接区域中间",
+            "to_semantic": "上转折参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          },
+          {
+            "key": "middle",
+            "definition_ref": "feline.hind@draft1/middle",
+            "from_semantic": "上转折参考",
+            "to_semantic": "下转折参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          },
+          {
+            "key": "lower",
+            "definition_ref": "feline.hind@draft1/lower",
+            "from_semantic": "下转折参考",
+            "to_semantic": "末端参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          }
+        ]
+      },
+      {
+        "id": "wing.feather@draft1",
+        "label": "羽翼：示例2段",
+        "status": "draft",
+        "directions": [
+          {
+            "key": "root_to_bend",
+            "definition_ref": "wing.feather@draft1/root_to_bend",
+            "from_semantic": "翼与身体连接区域",
+            "to_semantic": "翼的主要转折参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          },
+          {
+            "key": "bend_to_tip_reference",
+            "definition_ref": "wing.feather@draft1/bend_to_tip_reference",
+            "from_semantic": "翼的主要转折参考",
+            "to_semantic": "翼的外伸朝向参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          }
+        ]
+      },
+      {
+        "id": "dragon.core@draft1",
+        "label": "双足龙：头颈、骨盆至肩、尾根",
+        "status": "draft",
+        "directions": [
+          {
+            "key": "head",
+            "definition_ref": "dragon.core@draft1/head",
+            "from_semantic": "头部中心",
+            "to_semantic": "头部朝向参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          },
+          {
+            "key": "neck",
+            "definition_ref": "dragon.core@draft1/neck",
+            "from_semantic": "肩部连接区域",
+            "to_semantic": "颈部朝向参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          },
+          {
+            "key": "torso",
+            "definition_ref": "dragon.core@draft1/torso",
+            "from_semantic": "骨盆参考",
+            "to_semantic": "肩部参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          },
+          {
+            "key": "tail",
+            "definition_ref": "dragon.core@draft1/tail",
+            "from_semantic": "尾部连接区域",
+            "to_semantic": "尾巴向外初始朝向参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          }
+        ]
+      },
+      {
+        "id": "arm.claw@draft1",
+        "label": "爪形手臂：示例2段",
+        "status": "draft",
+        "directions": [
+          {
+            "key": "upper",
+            "definition_ref": "arm.claw@draft1/upper",
+            "from_semantic": "连接区域中间",
+            "to_semantic": "转折参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          },
+          {
+            "key": "lower",
+            "definition_ref": "arm.claw@draft1/lower",
+            "from_semantic": "转折参考",
+            "to_semantic": "末端参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          }
+        ]
+      },
+      {
+        "id": "leg.biped@draft1",
+        "label": "双足腿：示例3段",
+        "status": "draft",
+        "directions": [
+          {
+            "key": "upper",
+            "definition_ref": "leg.biped@draft1/upper",
+            "from_semantic": "连接区域中间",
+            "to_semantic": "上转折参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          },
+          {
+            "key": "middle",
+            "definition_ref": "leg.biped@draft1/middle",
+            "from_semantic": "上转折参考",
+            "to_semantic": "下转折参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          },
+          {
+            "key": "lower",
+            "definition_ref": "leg.biped@draft1/lower",
+            "from_semantic": "下转折参考",
+            "to_semantic": "末端参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          }
+        ]
+      },
+      {
+        "id": "wing.membrane@draft1",
+        "label": "膜翼：示例2段",
+        "status": "draft",
+        "directions": [
+          {
+            "key": "root_to_bend",
+            "definition_ref": "wing.membrane@draft1/root_to_bend",
+            "from_semantic": "翼与身体连接区域",
+            "to_semantic": "翼的主要转折参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          },
+          {
+            "key": "bend_to_tip_reference",
+            "definition_ref": "wing.membrane@draft1/bend_to_tip_reference",
+            "from_semantic": "翼的主要转折参考",
+            "to_semantic": "翼的外伸朝向参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          }
+        ]
+      },
+      {
+        "id": "hybrid.core@draft1",
+        "label": "弯曲躯干：示例2段＋头颈尾",
+        "status": "draft",
+        "directions": [
+          {
+            "key": "head",
+            "definition_ref": "hybrid.core@draft1/head",
+            "from_semantic": "头部中心",
+            "to_semantic": "头部朝向参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          },
+          {
+            "key": "neck",
+            "definition_ref": "hybrid.core@draft1/neck",
+            "from_semantic": "前躯连接中心",
+            "to_semantic": "颈部朝向参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          },
+          {
+            "key": "torso_a",
+            "definition_ref": "hybrid.core@draft1/torso_a",
+            "from_semantic": "躯干前部参考",
+            "to_semantic": "躯干中部参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          },
+          {
+            "key": "torso_b",
+            "definition_ref": "hybrid.core@draft1/torso_b",
+            "from_semantic": "躯干中部参考",
+            "to_semantic": "躯干后部参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          },
+          {
+            "key": "tail",
+            "definition_ref": "hybrid.core@draft1/tail",
+            "from_semantic": "尾部连接区域",
+            "to_semantic": "尾巴向外初始朝向参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          }
+        ]
+      },
+      {
+        "id": "limb.long@draft1",
+        "label": "异形肢：示例3段",
+        "status": "draft",
+        "directions": [
+          {
+            "key": "upper",
+            "definition_ref": "limb.long@draft1/upper",
+            "from_semantic": "连接区域中间",
+            "to_semantic": "上转折参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          },
+          {
+            "key": "middle",
+            "definition_ref": "limb.long@draft1/middle",
+            "from_semantic": "上转折参考",
+            "to_semantic": "下转折参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          },
+          {
+            "key": "lower",
+            "definition_ref": "limb.long@draft1/lower",
+            "from_semantic": "下转折参考",
+            "to_semantic": "末端参考",
+            "coordinate_space": "image_2d",
+            "rule_status": "draft_requires_visual_examples"
+          }
+        ]
+      }
+    ],
+    "profiles": [
+      {
+        "id": "pony.quadruped@2draft1",
+        "label": "小马：四足＋可选翼",
+        "parts": [
+          {
+            "slot": "core",
+            "role": "core",
+            "module_ref": "pony.core@1",
+            "optional": false
+          },
+          {
+            "slot": "fore_a",
+            "role": "forelimb",
+            "module_ref": "pony.fore@1",
+            "optional": false
+          },
+          {
+            "slot": "fore_b",
+            "role": "forelimb",
+            "module_ref": "pony.fore@1",
+            "optional": false
+          },
+          {
+            "slot": "hind_a",
+            "role": "hindlimb",
+            "module_ref": "pony.hind@1",
+            "optional": false
+          },
+          {
+            "slot": "hind_b",
+            "role": "hindlimb",
+            "module_ref": "pony.hind@1",
+            "optional": false
+          },
+          {
+            "slot": "wing_a",
+            "role": "wing",
+            "module_ref": "wing.feather@draft1",
+            "optional": true
+          },
+          {
+            "slot": "wing_b",
+            "role": "wing",
+            "module_ref": "wing.feather@draft1",
+            "optional": true
+          }
+        ],
+        "exchange_groups": [
+          {
+            "slots": [
+              "fore_a",
+              "fore_b"
+            ],
+            "mode": "whole_chain",
+            "default": "allow"
+          },
+          {
+            "slots": [
+              "hind_a",
+              "hind_b"
+            ],
+            "mode": "whole_chain",
+            "default": "allow"
+          },
+          {
+            "slots": [
+              "wing_a",
+              "wing_b"
+            ],
+            "mode": "whole_chain",
+            "default": "allow"
+          }
+        ]
+      },
+      {
+        "id": "griffon.quadruped@draft1",
+        "label": "狮鹫结构示例",
+        "parts": [
+          {
+            "slot": "core",
+            "role": "core",
+            "module_ref": "griffon.core@draft1",
+            "optional": false
+          },
+          {
+            "slot": "fore_a",
+            "role": "forelimb",
+            "module_ref": "claw.fore@draft1",
+            "optional": false
+          },
+          {
+            "slot": "fore_b",
+            "role": "forelimb",
+            "module_ref": "claw.fore@draft1",
+            "optional": false
+          },
+          {
+            "slot": "hind_a",
+            "role": "hindlimb",
+            "module_ref": "feline.hind@draft1",
+            "optional": false
+          },
+          {
+            "slot": "hind_b",
+            "role": "hindlimb",
+            "module_ref": "feline.hind@draft1",
+            "optional": false
+          },
+          {
+            "slot": "wing_a",
+            "role": "wing",
+            "module_ref": "wing.feather@draft1",
+            "optional": false
+          },
+          {
+            "slot": "wing_b",
+            "role": "wing",
+            "module_ref": "wing.feather@draft1",
+            "optional": false
+          }
+        ],
+        "exchange_groups": [
+          {
+            "slots": [
+              "fore_a",
+              "fore_b"
+            ],
+            "mode": "whole_chain",
+            "default": "allow"
+          },
+          {
+            "slots": [
+              "hind_a",
+              "hind_b"
+            ],
+            "mode": "whole_chain",
+            "default": "allow"
+          },
+          {
+            "slots": [
+              "wing_a",
+              "wing_b"
+            ],
+            "mode": "whole_chain",
+            "default": "allow"
+          }
+        ]
+      },
+      {
+        "id": "dragon.biped@draft1",
+        "label": "双足有翼龙结构示例",
+        "parts": [
+          {
+            "slot": "core",
+            "role": "core",
+            "module_ref": "dragon.core@draft1",
+            "optional": false
+          },
+          {
+            "slot": "arm_a",
+            "role": "arm",
+            "module_ref": "arm.claw@draft1",
+            "optional": false
+          },
+          {
+            "slot": "arm_b",
+            "role": "arm",
+            "module_ref": "arm.claw@draft1",
+            "optional": false
+          },
+          {
+            "slot": "leg_a",
+            "role": "leg",
+            "module_ref": "leg.biped@draft1",
+            "optional": false
+          },
+          {
+            "slot": "leg_b",
+            "role": "leg",
+            "module_ref": "leg.biped@draft1",
+            "optional": false
+          },
+          {
+            "slot": "wing_a",
+            "role": "wing",
+            "module_ref": "wing.membrane@draft1",
+            "optional": true
+          },
+          {
+            "slot": "wing_b",
+            "role": "wing",
+            "module_ref": "wing.membrane@draft1",
+            "optional": true
+          }
+        ],
+        "exchange_groups": [
+          {
+            "slots": [
+              "arm_a",
+              "arm_b"
+            ],
+            "mode": "whole_chain",
+            "default": "allow"
+          },
+          {
+            "slots": [
+              "leg_a",
+              "leg_b"
+            ],
+            "mode": "whole_chain",
+            "default": "allow"
+          },
+          {
+            "slots": [
+              "wing_a",
+              "wing_b"
+            ],
+            "mode": "whole_chain",
+            "default": "allow"
+          }
+        ]
+      },
+      {
+        "id": "hybrid.asymmetric@draft1",
+        "label": "不对称混合结构示例",
+        "parts": [
+          {
+            "slot": "core",
+            "role": "core",
+            "module_ref": "hybrid.core@draft1",
+            "optional": false
+          },
+          {
+            "slot": "fore_a",
+            "role": "forelimb",
+            "module_ref": "claw.fore@draft1",
+            "optional": false
+          },
+          {
+            "slot": "fore_b",
+            "role": "forelimb",
+            "module_ref": "limb.long@draft1",
+            "optional": false
+          },
+          {
+            "slot": "hind_a",
+            "role": "hindlimb",
+            "module_ref": "pony.hind@1",
+            "optional": false
+          },
+          {
+            "slot": "hind_b",
+            "role": "hindlimb",
+            "module_ref": "claw.fore@draft1",
+            "optional": false
+          },
+          {
+            "slot": "wing_a",
+            "role": "wing",
+            "module_ref": "wing.feather@draft1",
+            "optional": false
+          },
+          {
+            "slot": "wing_b",
+            "role": "wing",
+            "module_ref": "wing.membrane@draft1",
+            "optional": false
+          }
+        ],
+        "exchange_groups": []
+      }
+    ]
+  },
+  "comparison_contracts": [
+    {
+      "id": "pony.body14@1",
+      "status": "legacy_equivalent",
+      "meaning": "只比较小马原14方向，翼不在本次请求内",
+      "profiles": [
+        "pony.quadruped@2draft1"
+      ],
+      "channels": [
+        "core.head",
+        "core.neck",
+        "core.body",
+        "core.tail",
+        "fore_a.upper",
+        "fore_a.lower",
+        "fore_b.upper",
+        "fore_b.lower",
+        "hind_a.upper",
+        "hind_a.middle",
+        "hind_a.lower",
+        "hind_b.upper",
+        "hind_b.middle",
+        "hind_b.lower"
+      ],
+      "required_parts": [
+        "core",
+        "fore_a",
+        "fore_b",
+        "hind_a",
+        "hind_b"
+      ]
+    },
+    {
+      "id": "cross_species.head_only@draft1",
+      "status": "draft_not_production",
+      "meaning": "只比较头的朝向，不能称为整体姿态相似",
+      "projections": [
+        {
+          "profile_ref": "pony.quadruped@2draft1",
+          "mapping": {
+            "head_facing": "core.head"
+          }
+        },
+        {
+          "profile_ref": "griffon.quadruped@draft1",
+          "mapping": {
+            "head_facing": "core.head"
+          }
+        },
+        {
+          "profile_ref": "dragon.biped@draft1",
+          "mapping": {
+            "head_facing": "core.head"
+          }
+        },
+        {
+          "profile_ref": "hybrid.asymmetric@draft1",
+          "mapping": {
+            "head_facing": "core.head"
+          }
+        }
+      ]
+    },
+    {
+      "id": "feather_wings@draft1",
+      "status": "draft_not_production",
+      "meaning": "翼的分段规则需实际素材确认，不将羽翼和膜翼自动等同",
+      "profiles": [
+        "pony.quadruped@2draft1",
+        "griffon.quadruped@draft1"
+      ],
+      "required_parts": [
+        "wing_a",
+        "wing_b"
+      ]
+    }
+  ],
+  "legacy_body14_mapping": {
+    "head": "core.head",
+    "neck": "core.neck",
+    "body": "core.body",
+    "tail": "core.tail",
+    "front.1.1": "fore_a.upper",
+    "front.1.2": "fore_a.lower",
+    "front.2.1": "fore_b.upper",
+    "front.2.2": "fore_b.lower",
+    "hind.1.1": "hind_a.upper",
+    "hind.1.2": "hind_a.middle",
+    "hind.1.3": "hind_a.lower",
+    "hind.2.1": "hind_b.upper",
+    "hind.2.2": "hind_b.middle",
+    "hind.2.3": "hind_b.lower"
+  },
+  "examples": [
+    {
+      "schema_version": "pose_observation_v2alpha1",
+      "example_only": true,
+      "observation_id": "example_observation_1",
+      "occurrence_id": "example_occurrence_1",
+      "subject": {
+        "character_ref": "twilight_sparkle",
+        "form_ref": "twilight.unicorn@1",
+        "track_ref": null
+      },
+      "profile_ref": "pony.quadruped@2draft1",
+      "image_ref": "illustration_1",
+      "coordinates": {
+        "space": "image_2d",
+        "x_axis": "right",
+        "y_axis": "down",
+        "image_size": [
+          360,
+          250
+        ]
+      },
+      "annotation": {
+        "id": "example_annotation_1_r1",
+        "parent_ids": [],
+        "directions": {
+          "core.head": {
+            "value": [
+              -1.0,
+              0.0
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "core.neck": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "core.body": {
+            "value": [
+              1.0,
+              0.0
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "core.tail": {
+            "value": [
+              1.0,
+              0.0
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "fore_a.upper": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "fore_a.lower": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "fore_b.upper": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "fore_b.lower": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_a.upper": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_a.middle": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_a.lower": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_b.upper": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_b.middle": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_b.lower": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          }
+        },
+        "parts": {
+          "core": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "fore_a": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "fore_b": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "hind_a": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "hind_b": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "wing_a": {
+            "presence": "absent",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "wing_b": {
+            "presence": "absent",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          }
+        },
+        "reference_points": null,
+        "view": {
+          "body": null,
+          "head": null
+        },
+        "layout": null
+      },
+      "asset_access": {
+        "complete_character": "unknown",
+        "evidence_refs": []
+      },
+      "evidence": [
+        {
+          "id": "evidence_example",
+          "kind": "synthetic",
+          "note": "仅用于验证设计，非真实角色或训练标注"
+        }
+      ],
+      "source": {
+        "kind": "synthetic_diagram",
+        "media_ref": null,
+        "scene_ref": null,
+        "frame_index": null,
+        "fps": null,
+        "asset_instance_path": null,
+        "alignment_ref": null
+      },
+      "split_groups": {
+        "shot_ref": null,
+        "asset_family_ref": null
+      }
+    },
+    {
+      "schema_version": "pose_observation_v2alpha1",
+      "example_only": true,
+      "observation_id": "example_observation_2",
+      "occurrence_id": "example_occurrence_2",
+      "subject": {
+        "character_ref": "twilight_sparkle",
+        "form_ref": "twilight.alicorn@1",
+        "track_ref": null
+      },
+      "profile_ref": "pony.quadruped@2draft1",
+      "image_ref": "illustration_2",
+      "coordinates": {
+        "space": "image_2d",
+        "x_axis": "right",
+        "y_axis": "down",
+        "image_size": [
+          360,
+          250
+        ]
+      },
+      "annotation": {
+        "id": "example_annotation_2_r1",
+        "parent_ids": [],
+        "directions": {
+          "core.head": {
+            "value": [
+              -1.0,
+              0.0
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "core.neck": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "core.body": {
+            "value": [
+              1.0,
+              0.0
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "core.tail": {
+            "value": [
+              1.0,
+              0.0
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "fore_a.upper": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "fore_a.lower": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "fore_b.upper": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "fore_b.lower": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_a.upper": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_a.middle": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_a.lower": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_b.upper": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_b.middle": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_b.lower": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "wing_a.root_to_bend": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "wing_a.bend_to_tip_reference": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "wing_b.root_to_bend": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "wing_b.bend_to_tip_reference": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          }
+        },
+        "parts": {
+          "core": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "fore_a": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "fore_b": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "hind_a": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "hind_b": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "wing_a": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "wing_b": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          }
+        },
+        "reference_points": null,
+        "view": {
+          "body": null,
+          "head": null
+        },
+        "layout": null
+      },
+      "asset_access": {
+        "complete_character": "unknown",
+        "evidence_refs": []
+      },
+      "evidence": [
+        {
+          "id": "evidence_example",
+          "kind": "synthetic",
+          "note": "仅用于验证设计，非真实角色或训练标注"
+        }
+      ],
+      "source": {
+        "kind": "synthetic_diagram",
+        "media_ref": null,
+        "scene_ref": null,
+        "frame_index": null,
+        "fps": null,
+        "asset_instance_path": null,
+        "alignment_ref": null
+      },
+      "split_groups": {
+        "shot_ref": null,
+        "asset_family_ref": null
+      }
+    },
+    {
+      "schema_version": "pose_observation_v2alpha1",
+      "example_only": true,
+      "observation_id": "example_observation_3",
+      "occurrence_id": "example_occurrence_3",
+      "subject": {
+        "character_ref": "example_griffon",
+        "form_ref": "example.griffon@1",
+        "track_ref": null
+      },
+      "profile_ref": "griffon.quadruped@draft1",
+      "image_ref": "illustration_3",
+      "coordinates": {
+        "space": "image_2d",
+        "x_axis": "right",
+        "y_axis": "down",
+        "image_size": [
+          360,
+          250
+        ]
+      },
+      "annotation": {
+        "id": "example_annotation_3_r1",
+        "parent_ids": [],
+        "directions": {
+          "core.head": {
+            "value": [
+              -1.0,
+              0.0
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "core.neck": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "core.body": {
+            "value": [
+              1.0,
+              0.0
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "core.tail": {
+            "value": [
+              1.0,
+              0.0
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "fore_a.upper": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "fore_a.lower": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "fore_b.upper": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "fore_b.lower": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_a.upper": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_a.middle": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_a.lower": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_b.upper": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_b.middle": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_b.lower": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "wing_a.root_to_bend": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "wing_a.bend_to_tip_reference": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "wing_b.root_to_bend": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "wing_b.bend_to_tip_reference": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          }
+        },
+        "parts": {
+          "core": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "fore_a": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "fore_b": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "hind_a": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "hind_b": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "wing_a": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "wing_b": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          }
+        },
+        "reference_points": null,
+        "view": {
+          "body": null,
+          "head": null
+        },
+        "layout": null
+      },
+      "asset_access": {
+        "complete_character": "unknown",
+        "evidence_refs": []
+      },
+      "evidence": [
+        {
+          "id": "evidence_example",
+          "kind": "synthetic",
+          "note": "仅用于验证设计，非真实角色或训练标注"
+        }
+      ],
+      "source": {
+        "kind": "synthetic_diagram",
+        "media_ref": null,
+        "scene_ref": null,
+        "frame_index": null,
+        "fps": null,
+        "asset_instance_path": null,
+        "alignment_ref": null
+      },
+      "split_groups": {
+        "shot_ref": null,
+        "asset_family_ref": null
+      }
+    },
+    {
+      "schema_version": "pose_observation_v2alpha1",
+      "example_only": true,
+      "observation_id": "example_observation_4",
+      "occurrence_id": "example_occurrence_4",
+      "subject": {
+        "character_ref": "example_dragon",
+        "form_ref": "example.dragon@1",
+        "track_ref": null
+      },
+      "profile_ref": "dragon.biped@draft1",
+      "image_ref": "illustration_4",
+      "coordinates": {
+        "space": "image_2d",
+        "x_axis": "right",
+        "y_axis": "down",
+        "image_size": [
+          360,
+          250
+        ]
+      },
+      "annotation": {
+        "id": "example_annotation_4_r1",
+        "parent_ids": [],
+        "directions": {
+          "core.head": {
+            "value": [
+              -1.0,
+              0.0
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "core.neck": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "core.torso": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "core.tail": {
+            "value": [
+              1.0,
+              0.0
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "arm_a.upper": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "arm_a.lower": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "arm_b.upper": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "arm_b.lower": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "leg_a.upper": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "leg_a.middle": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "leg_a.lower": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "leg_b.upper": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "leg_b.middle": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "leg_b.lower": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "wing_a.root_to_bend": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "wing_a.bend_to_tip_reference": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "wing_b.root_to_bend": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "wing_b.bend_to_tip_reference": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          }
+        },
+        "parts": {
+          "core": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "arm_a": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "arm_b": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "leg_a": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "leg_b": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "wing_a": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "wing_b": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          }
+        },
+        "reference_points": null,
+        "view": {
+          "body": null,
+          "head": null
+        },
+        "layout": null
+      },
+      "asset_access": {
+        "complete_character": "unknown",
+        "evidence_refs": []
+      },
+      "evidence": [
+        {
+          "id": "evidence_example",
+          "kind": "synthetic",
+          "note": "仅用于验证设计，非真实角色或训练标注"
+        }
+      ],
+      "source": {
+        "kind": "synthetic_diagram",
+        "media_ref": null,
+        "scene_ref": null,
+        "frame_index": null,
+        "fps": null,
+        "asset_instance_path": null,
+        "alignment_ref": null
+      },
+      "split_groups": {
+        "shot_ref": null,
+        "asset_family_ref": null
+      }
+    },
+    {
+      "schema_version": "pose_observation_v2alpha1",
+      "example_only": true,
+      "observation_id": "example_observation_5",
+      "occurrence_id": "example_occurrence_5",
+      "subject": {
+        "character_ref": "example_hybrid",
+        "form_ref": "example.hybrid@1",
+        "track_ref": null
+      },
+      "profile_ref": "hybrid.asymmetric@draft1",
+      "image_ref": "illustration_5",
+      "coordinates": {
+        "space": "image_2d",
+        "x_axis": "right",
+        "y_axis": "down",
+        "image_size": [
+          360,
+          250
+        ]
+      },
+      "annotation": {
+        "id": "example_annotation_5_r1",
+        "parent_ids": [],
+        "directions": {
+          "core.head": {
+            "value": [
+              -1.0,
+              0.0
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "core.neck": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "core.torso_a": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "core.torso_b": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "core.tail": {
+            "value": [
+              1.0,
+              0.0
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "fore_a.upper": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "fore_a.lower": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "fore_b.upper": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "fore_b.middle": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "fore_b.lower": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_a.upper": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_a.middle": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_a.lower": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_b.upper": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "hind_b.lower": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "wing_a.root_to_bend": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "wing_a.bend_to_tip_reference": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "wing_b.root_to_bend": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          },
+          "wing_b.bend_to_tip_reference": {
+            "value": [
+              0.342020143,
+              0.939692621
+            ],
+            "missing_reason": null,
+            "visibility": "unknown",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "review_status": "unreviewed",
+            "confidence": null
+          }
+        },
+        "parts": {
+          "core": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "fore_a": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "fore_b": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "hind_a": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "hind_b": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "wing_a": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          },
+          "wing_b": {
+            "presence": "present",
+            "evidence_refs": [
+              "evidence_example"
+            ],
+            "identity": {
+              "anatomical_side": null,
+              "camera_depth": null,
+              "asset_path": null
+            }
+          }
+        },
+        "reference_points": null,
+        "view": {
+          "body": null,
+          "head": null
+        },
+        "layout": null
+      },
+      "asset_access": {
+        "complete_character": "unknown",
+        "evidence_refs": []
+      },
+      "evidence": [
+        {
+          "id": "evidence_example",
+          "kind": "synthetic",
+          "note": "仅用于验证设计，非真实角色或训练标注"
+        }
+      ],
+      "source": {
+        "kind": "synthetic_diagram",
+        "media_ref": null,
+        "scene_ref": null,
+        "frame_index": null,
+        "fps": null,
+        "asset_instance_path": null,
+        "alignment_ref": null
+      },
+      "split_groups": {
+        "shot_ref": null,
+        "asset_family_ref": null
+      }
+    }
+  ]
+}

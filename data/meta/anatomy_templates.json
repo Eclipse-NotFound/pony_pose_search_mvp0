@@ -1,0 +1,12 @@
+{
+  "version": "anatomy_templates_v1",
+  "anatomy": {
+    "unicorn": {
+      "has_wings": false,
+      "has_tail": true,
+      "leg_count": 4,
+      "wing_count": 0,
+      "default_keypoint_schema_id": "pony_unicorn_no_wings_mvp0_v3"
+    }
+  }
+}

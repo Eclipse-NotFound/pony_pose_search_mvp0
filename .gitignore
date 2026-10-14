@@ -1,0 +1,53 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Test cache
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# IDE / editor
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Raw video assets
+raw_videos/
+
+# M01 generated frames
+frames/
+
+# Runtime logs
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Local AI agent / editor workspace
+.zcode/
+# MVP2 派生数据（可再生，不入库）
+/downloads/
+/dataset/
+/models/
+/suggestions/
+
+# Multi-species mutable library: original labels remain in their existing directories.
+/data/pose_library_v2/
+
+# Local experiments, publication staging and model weights
+/.probe/
+/experiments/
+/F1_ds/
+*.pt
+*.pth
+*.onnx
+.env
+.env.*
+!.env.example

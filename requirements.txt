@@ -1,0 +1,2 @@
+# Core M10 application; Python with Tcl/Tk is also required.
+Pillow>=10

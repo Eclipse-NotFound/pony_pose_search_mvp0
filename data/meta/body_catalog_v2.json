@@ -1,0 +1,1710 @@
+{
+  "characters": [
+    {
+      "id": "twilight_sparkle",
+      "label": "暮光闪闪"
+    }
+  ],
+  "species": [
+    {
+      "id": "pony",
+      "label": "小马"
+    },
+    {
+      "id": "griffon",
+      "label": "狮鹫"
+    },
+    {
+      "id": "dragon",
+      "label": "龙"
+    },
+    {
+      "id": "mixed_unspecified",
+      "label": "混合，未细分"
+    }
+  ],
+  "forms": [
+    {
+      "id": "twilight.unicorn@1",
+      "character_ref": "twilight_sparkle",
+      "species_ref": "pony",
+      "profile_ref": "pony.quadruped@2draft1",
+      "expected_presence": {
+        "wing_a": "absent",
+        "wing_b": "absent"
+      },
+      "status": "known_form",
+      "label": "暮光 · 独角兽"
+    },
+    {
+      "id": "twilight.alicorn@1",
+      "character_ref": "twilight_sparkle",
+      "species_ref": "pony",
+      "profile_ref": "pony.quadruped@2draft1",
+      "expected_presence": {
+        "wing_a": "present",
+        "wing_b": "present"
+      },
+      "status": "known_form",
+      "label": "暮光 · 公主"
+    },
+    {
+      "id": "generic.griffon@1",
+      "character_ref": null,
+      "species_ref": "griffon",
+      "profile_ref": "griffon.quadruped@draft1",
+      "expected_presence": {
+        "wing_a": "present",
+        "wing_b": "present"
+      },
+      "status": "structure_template",
+      "label": "狮鹫 · 四足羽翼"
+    },
+    {
+      "id": "generic.dragon@1",
+      "character_ref": null,
+      "species_ref": "dragon",
+      "profile_ref": "dragon.biped@draft1",
+      "expected_presence": {
+        "wing_a": "present",
+        "wing_b": "present"
+      },
+      "status": "structure_template",
+      "label": "龙 · 双足膜翼"
+    },
+    {
+      "id": "generic.hybrid@1",
+      "character_ref": null,
+      "species_ref": "mixed_unspecified",
+      "profile_ref": "hybrid.asymmetric@draft1",
+      "expected_presence": {
+        "wing_a": "present",
+        "wing_b": "present"
+      },
+      "status": "structure_template",
+      "label": "混合 · 不对称身体"
+    }
+  ],
+  "modules": [
+    {
+      "id": "pony.core@1",
+      "label": "小马头颈、躯干、尾根",
+      "status": "legacy_equivalent",
+      "directions": [
+        {
+          "key": "head",
+          "definition_ref": "pony.core@1/head",
+          "from_semantic": "头部中心",
+          "to_semantic": "头部朝向参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "legacy_equivalent"
+        },
+        {
+          "key": "neck",
+          "definition_ref": "pony.core@1/neck",
+          "from_semantic": "前躯连接中心",
+          "to_semantic": "颈部朝向参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "legacy_equivalent"
+        },
+        {
+          "key": "body",
+          "definition_ref": "pony.core@1/body",
+          "from_semantic": "前躯连接中心",
+          "to_semantic": "后躯连接中心",
+          "coordinate_space": "image_2d",
+          "rule_status": "legacy_equivalent"
+        },
+        {
+          "key": "tail",
+          "definition_ref": "pony.core@1/tail",
+          "from_semantic": "尾部连接区域",
+          "to_semantic": "尾巴向外初始朝向参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "legacy_equivalent"
+        }
+      ]
+    },
+    {
+      "id": "pony.fore@1",
+      "label": "小马前腿：2段",
+      "status": "legacy_equivalent",
+      "directions": [
+        {
+          "key": "upper",
+          "definition_ref": "pony.fore@1/upper",
+          "from_semantic": "连接区域中间",
+          "to_semantic": "转折参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "legacy_equivalent"
+        },
+        {
+          "key": "lower",
+          "definition_ref": "pony.fore@1/lower",
+          "from_semantic": "转折参考",
+          "to_semantic": "末端参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "legacy_equivalent"
+        }
+      ]
+    },
+    {
+      "id": "pony.hind@1",
+      "label": "小马后腿：3段",
+      "status": "legacy_equivalent",
+      "directions": [
+        {
+          "key": "upper",
+          "definition_ref": "pony.hind@1/upper",
+          "from_semantic": "连接区域中间",
+          "to_semantic": "上转折参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "legacy_equivalent"
+        },
+        {
+          "key": "middle",
+          "definition_ref": "pony.hind@1/middle",
+          "from_semantic": "上转折参考",
+          "to_semantic": "下转折参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "legacy_equivalent"
+        },
+        {
+          "key": "lower",
+          "definition_ref": "pony.hind@1/lower",
+          "from_semantic": "下转折参考",
+          "to_semantic": "末端参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "legacy_equivalent"
+        }
+      ]
+    },
+    {
+      "id": "griffon.core@draft1",
+      "label": "狮鹫头颈、躯干、尾根",
+      "status": "draft",
+      "directions": [
+        {
+          "key": "head",
+          "definition_ref": "griffon.core@draft1/head",
+          "from_semantic": "头部中心",
+          "to_semantic": "头部朝向参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        },
+        {
+          "key": "neck",
+          "definition_ref": "griffon.core@draft1/neck",
+          "from_semantic": "前躯连接中心",
+          "to_semantic": "颈部朝向参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        },
+        {
+          "key": "body",
+          "definition_ref": "griffon.core@draft1/body",
+          "from_semantic": "前躯连接中心",
+          "to_semantic": "后躯连接中心",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        },
+        {
+          "key": "tail",
+          "definition_ref": "griffon.core@draft1/tail",
+          "from_semantic": "尾部连接区域",
+          "to_semantic": "尾巴向外初始朝向参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        }
+      ]
+    },
+    {
+      "id": "claw.fore@draft1",
+      "label": "爪形前肢：示例2段",
+      "status": "draft",
+      "directions": [
+        {
+          "key": "upper",
+          "definition_ref": "claw.fore@draft1/upper",
+          "from_semantic": "连接区域中间",
+          "to_semantic": "转折参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        },
+        {
+          "key": "lower",
+          "definition_ref": "claw.fore@draft1/lower",
+          "from_semantic": "转折参考",
+          "to_semantic": "末端参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        }
+      ]
+    },
+    {
+      "id": "feline.hind@draft1",
+      "label": "兽形后肢：示例3段",
+      "status": "draft",
+      "directions": [
+        {
+          "key": "upper",
+          "definition_ref": "feline.hind@draft1/upper",
+          "from_semantic": "连接区域中间",
+          "to_semantic": "上转折参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        },
+        {
+          "key": "middle",
+          "definition_ref": "feline.hind@draft1/middle",
+          "from_semantic": "上转折参考",
+          "to_semantic": "下转折参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        },
+        {
+          "key": "lower",
+          "definition_ref": "feline.hind@draft1/lower",
+          "from_semantic": "下转折参考",
+          "to_semantic": "末端参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        }
+      ]
+    },
+    {
+      "id": "wing.feather@draft1",
+      "label": "羽翼：示例2段",
+      "status": "draft",
+      "directions": [
+        {
+          "key": "root_to_bend",
+          "definition_ref": "wing.feather@draft1/root_to_bend",
+          "from_semantic": "翼与身体连接区域",
+          "to_semantic": "翼的主要转折参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        },
+        {
+          "key": "bend_to_tip_reference",
+          "definition_ref": "wing.feather@draft1/bend_to_tip_reference",
+          "from_semantic": "翼的主要转折参考",
+          "to_semantic": "翼的外伸朝向参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        }
+      ]
+    },
+    {
+      "id": "dragon.core@draft1",
+      "label": "双足龙：头颈、骨盆至肩、尾根",
+      "status": "draft",
+      "directions": [
+        {
+          "key": "head",
+          "definition_ref": "dragon.core@draft1/head",
+          "from_semantic": "头部中心",
+          "to_semantic": "头部朝向参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        },
+        {
+          "key": "neck",
+          "definition_ref": "dragon.core@draft1/neck",
+          "from_semantic": "肩部连接区域",
+          "to_semantic": "颈部朝向参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        },
+        {
+          "key": "torso",
+          "definition_ref": "dragon.core@draft1/torso",
+          "from_semantic": "骨盆参考",
+          "to_semantic": "肩部参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        },
+        {
+          "key": "tail",
+          "definition_ref": "dragon.core@draft1/tail",
+          "from_semantic": "尾部连接区域",
+          "to_semantic": "尾巴向外初始朝向参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        }
+      ]
+    },
+    {
+      "id": "arm.claw@draft1",
+      "label": "爪形手臂：示例2段",
+      "status": "draft",
+      "directions": [
+        {
+          "key": "upper",
+          "definition_ref": "arm.claw@draft1/upper",
+          "from_semantic": "连接区域中间",
+          "to_semantic": "转折参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        },
+        {
+          "key": "lower",
+          "definition_ref": "arm.claw@draft1/lower",
+          "from_semantic": "转折参考",
+          "to_semantic": "末端参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        }
+      ]
+    },
+    {
+      "id": "leg.biped@draft1",
+      "label": "双足腿：示例3段",
+      "status": "draft",
+      "directions": [
+        {
+          "key": "upper",
+          "definition_ref": "leg.biped@draft1/upper",
+          "from_semantic": "连接区域中间",
+          "to_semantic": "上转折参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        },
+        {
+          "key": "middle",
+          "definition_ref": "leg.biped@draft1/middle",
+          "from_semantic": "上转折参考",
+          "to_semantic": "下转折参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        },
+        {
+          "key": "lower",
+          "definition_ref": "leg.biped@draft1/lower",
+          "from_semantic": "下转折参考",
+          "to_semantic": "末端参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        }
+      ]
+    },
+    {
+      "id": "wing.membrane@draft1",
+      "label": "膜翼：示例2段",
+      "status": "draft",
+      "directions": [
+        {
+          "key": "root_to_bend",
+          "definition_ref": "wing.membrane@draft1/root_to_bend",
+          "from_semantic": "翼与身体连接区域",
+          "to_semantic": "翼的主要转折参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        },
+        {
+          "key": "bend_to_tip_reference",
+          "definition_ref": "wing.membrane@draft1/bend_to_tip_reference",
+          "from_semantic": "翼的主要转折参考",
+          "to_semantic": "翼的外伸朝向参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        }
+      ]
+    },
+    {
+      "id": "hybrid.core@draft1",
+      "label": "弯曲躯干：示例2段＋头颈尾",
+      "status": "draft",
+      "directions": [
+        {
+          "key": "head",
+          "definition_ref": "hybrid.core@draft1/head",
+          "from_semantic": "头部中心",
+          "to_semantic": "头部朝向参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        },
+        {
+          "key": "neck",
+          "definition_ref": "hybrid.core@draft1/neck",
+          "from_semantic": "前躯连接中心",
+          "to_semantic": "颈部朝向参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        },
+        {
+          "key": "torso_a",
+          "definition_ref": "hybrid.core@draft1/torso_a",
+          "from_semantic": "躯干前部参考",
+          "to_semantic": "躯干中部参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        },
+        {
+          "key": "torso_b",
+          "definition_ref": "hybrid.core@draft1/torso_b",
+          "from_semantic": "躯干中部参考",
+          "to_semantic": "躯干后部参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        },
+        {
+          "key": "tail",
+          "definition_ref": "hybrid.core@draft1/tail",
+          "from_semantic": "尾部连接区域",
+          "to_semantic": "尾巴向外初始朝向参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        }
+      ]
+    },
+    {
+      "id": "limb.long@draft1",
+      "label": "异形肢：示例3段",
+      "status": "draft",
+      "directions": [
+        {
+          "key": "upper",
+          "definition_ref": "limb.long@draft1/upper",
+          "from_semantic": "连接区域中间",
+          "to_semantic": "上转折参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        },
+        {
+          "key": "middle",
+          "definition_ref": "limb.long@draft1/middle",
+          "from_semantic": "上转折参考",
+          "to_semantic": "下转折参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        },
+        {
+          "key": "lower",
+          "definition_ref": "limb.long@draft1/lower",
+          "from_semantic": "下转折参考",
+          "to_semantic": "末端参考",
+          "coordinate_space": "image_2d",
+          "rule_status": "draft_requires_visual_examples"
+        }
+      ]
+    }
+  ],
+  "profiles": [
+    {
+      "id": "pony.quadruped@2draft1",
+      "label": "小马：四足＋可选翼",
+      "parts": [
+        {
+          "slot": "core",
+          "role": "core",
+          "module_ref": "pony.core@1",
+          "optional": false
+        },
+        {
+          "slot": "fore_a",
+          "role": "forelimb",
+          "module_ref": "pony.fore@1",
+          "optional": false
+        },
+        {
+          "slot": "fore_b",
+          "role": "forelimb",
+          "module_ref": "pony.fore@1",
+          "optional": false
+        },
+        {
+          "slot": "hind_a",
+          "role": "hindlimb",
+          "module_ref": "pony.hind@1",
+          "optional": false
+        },
+        {
+          "slot": "hind_b",
+          "role": "hindlimb",
+          "module_ref": "pony.hind@1",
+          "optional": false
+        },
+        {
+          "slot": "wing_a",
+          "role": "wing",
+          "module_ref": "wing.feather@draft1",
+          "optional": true
+        },
+        {
+          "slot": "wing_b",
+          "role": "wing",
+          "module_ref": "wing.feather@draft1",
+          "optional": true
+        }
+      ],
+      "exchange_groups": [
+        {
+          "slots": [
+            "fore_a",
+            "fore_b"
+          ],
+          "mode": "whole_chain",
+          "default": "allow"
+        },
+        {
+          "slots": [
+            "hind_a",
+            "hind_b"
+          ],
+          "mode": "whole_chain",
+          "default": "allow"
+        },
+        {
+          "slots": [
+            "wing_a",
+            "wing_b"
+          ],
+          "mode": "whole_chain",
+          "default": "allow"
+        }
+      ]
+    },
+    {
+      "id": "griffon.quadruped@draft1",
+      "label": "狮鹫结构示例",
+      "parts": [
+        {
+          "slot": "core",
+          "role": "core",
+          "module_ref": "griffon.core@draft1",
+          "optional": false
+        },
+        {
+          "slot": "fore_a",
+          "role": "forelimb",
+          "module_ref": "claw.fore@draft1",
+          "optional": false
+        },
+        {
+          "slot": "fore_b",
+          "role": "forelimb",
+          "module_ref": "claw.fore@draft1",
+          "optional": false
+        },
+        {
+          "slot": "hind_a",
+          "role": "hindlimb",
+          "module_ref": "feline.hind@draft1",
+          "optional": false
+        },
+        {
+          "slot": "hind_b",
+          "role": "hindlimb",
+          "module_ref": "feline.hind@draft1",
+          "optional": false
+        },
+        {
+          "slot": "wing_a",
+          "role": "wing",
+          "module_ref": "wing.feather@draft1",
+          "optional": false
+        },
+        {
+          "slot": "wing_b",
+          "role": "wing",
+          "module_ref": "wing.feather@draft1",
+          "optional": false
+        }
+      ],
+      "exchange_groups": [
+        {
+          "slots": [
+            "fore_a",
+            "fore_b"
+          ],
+          "mode": "whole_chain",
+          "default": "allow"
+        },
+        {
+          "slots": [
+            "hind_a",
+            "hind_b"
+          ],
+          "mode": "whole_chain",
+          "default": "allow"
+        },
+        {
+          "slots": [
+            "wing_a",
+            "wing_b"
+          ],
+          "mode": "whole_chain",
+          "default": "allow"
+        }
+      ]
+    },
+    {
+      "id": "dragon.biped@draft1",
+      "label": "双足有翼龙结构示例",
+      "parts": [
+        {
+          "slot": "core",
+          "role": "core",
+          "module_ref": "dragon.core@draft1",
+          "optional": false
+        },
+        {
+          "slot": "arm_a",
+          "role": "arm",
+          "module_ref": "arm.claw@draft1",
+          "optional": false
+        },
+        {
+          "slot": "arm_b",
+          "role": "arm",
+          "module_ref": "arm.claw@draft1",
+          "optional": false
+        },
+        {
+          "slot": "leg_a",
+          "role": "leg",
+          "module_ref": "leg.biped@draft1",
+          "optional": false
+        },
+        {
+          "slot": "leg_b",
+          "role": "leg",
+          "module_ref": "leg.biped@draft1",
+          "optional": false
+        },
+        {
+          "slot": "wing_a",
+          "role": "wing",
+          "module_ref": "wing.membrane@draft1",
+          "optional": true
+        },
+        {
+          "slot": "wing_b",
+          "role": "wing",
+          "module_ref": "wing.membrane@draft1",
+          "optional": true
+        }
+      ],
+      "exchange_groups": [
+        {
+          "slots": [
+            "arm_a",
+            "arm_b"
+          ],
+          "mode": "whole_chain",
+          "default": "allow"
+        },
+        {
+          "slots": [
+            "leg_a",
+            "leg_b"
+          ],
+          "mode": "whole_chain",
+          "default": "allow"
+        },
+        {
+          "slots": [
+            "wing_a",
+            "wing_b"
+          ],
+          "mode": "whole_chain",
+          "default": "allow"
+        }
+      ]
+    },
+    {
+      "id": "hybrid.asymmetric@draft1",
+      "label": "不对称混合结构示例",
+      "parts": [
+        {
+          "slot": "core",
+          "role": "core",
+          "module_ref": "hybrid.core@draft1",
+          "optional": false
+        },
+        {
+          "slot": "fore_a",
+          "role": "forelimb",
+          "module_ref": "claw.fore@draft1",
+          "optional": false
+        },
+        {
+          "slot": "fore_b",
+          "role": "forelimb",
+          "module_ref": "limb.long@draft1",
+          "optional": false
+        },
+        {
+          "slot": "hind_a",
+          "role": "hindlimb",
+          "module_ref": "pony.hind@1",
+          "optional": false
+        },
+        {
+          "slot": "hind_b",
+          "role": "hindlimb",
+          "module_ref": "claw.fore@draft1",
+          "optional": false
+        },
+        {
+          "slot": "wing_a",
+          "role": "wing",
+          "module_ref": "wing.feather@draft1",
+          "optional": false
+        },
+        {
+          "slot": "wing_b",
+          "role": "wing",
+          "module_ref": "wing.membrane@draft1",
+          "optional": false
+        }
+      ],
+      "exchange_groups": []
+    }
+  ],
+  "schema_version": "pose_catalog_v2",
+  "contracts": [
+    {
+      "id": "pony.body14@1",
+      "label": "小马身体14方向（不比较翼）",
+      "status": "confirmed",
+      "groups": [
+        {
+          "id": "head",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "core.head"
+              ],
+              "segment_weights": [
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "neck",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "core.neck"
+              ],
+              "segment_weights": [
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "tail",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "core.tail"
+              ],
+              "segment_weights": [
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "core.body"
+              ],
+              "segment_weights": [
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "front_legs",
+          "weight": 1.0,
+          "exchange": true,
+          "chains": [
+            {
+              "channels": [
+                "fore_a.upper",
+                "fore_a.lower"
+              ],
+              "segment_weights": [
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "channels": [
+                "fore_b.upper",
+                "fore_b.lower"
+              ],
+              "segment_weights": [
+                1.0,
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "back_legs",
+          "weight": 1.0,
+          "exchange": true,
+          "chains": [
+            {
+              "channels": [
+                "hind_a.upper",
+                "hind_a.middle",
+                "hind_a.lower"
+              ],
+              "segment_weights": [
+                0.4,
+                0.2,
+                0.4
+              ]
+            },
+            {
+              "channels": [
+                "hind_b.upper",
+                "hind_b.middle",
+                "hind_b.lower"
+              ],
+              "segment_weights": [
+                0.4,
+                0.2,
+                0.4
+              ]
+            }
+          ]
+        }
+      ],
+      "projections": {
+        "pony.quadruped@2draft1": {
+          "core.head": "core.head",
+          "core.neck": "core.neck",
+          "core.tail": "core.tail",
+          "core.body": "core.body",
+          "fore_a.upper": "fore_a.upper",
+          "fore_a.lower": "fore_a.lower",
+          "fore_b.upper": "fore_b.upper",
+          "fore_b.lower": "fore_b.lower",
+          "hind_a.upper": "hind_a.upper",
+          "hind_a.middle": "hind_a.middle",
+          "hind_a.lower": "hind_a.lower",
+          "hind_b.upper": "hind_b.upper",
+          "hind_b.middle": "hind_b.middle",
+          "hind_b.lower": "hind_b.lower"
+        }
+      },
+      "context": {
+        "view_parts": [
+          "body",
+          "head"
+        ],
+        "layout_definitions": [
+          "pony.body_midpoint_and_length@1"
+        ]
+      }
+    },
+    {
+      "id": "whole.pony.quadruped@2draft1",
+      "label": "小马：四足＋可选翼 · 全部已存在部位（草案）",
+      "status": "draft",
+      "groups": [
+        {
+          "id": "head",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "core.head"
+              ],
+              "segment_weights": [
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "neck",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "core.neck"
+              ],
+              "segment_weights": [
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "tail",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "core.tail"
+              ],
+              "segment_weights": [
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "core.body"
+              ],
+              "segment_weights": [
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "front_legs",
+          "weight": 1.0,
+          "exchange": true,
+          "chains": [
+            {
+              "channels": [
+                "fore_a.upper",
+                "fore_a.lower"
+              ],
+              "segment_weights": [
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "channels": [
+                "fore_b.upper",
+                "fore_b.lower"
+              ],
+              "segment_weights": [
+                1.0,
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "back_legs",
+          "weight": 1.0,
+          "exchange": true,
+          "chains": [
+            {
+              "channels": [
+                "hind_a.upper",
+                "hind_a.middle",
+                "hind_a.lower"
+              ],
+              "segment_weights": [
+                0.4,
+                0.2,
+                0.4
+              ]
+            },
+            {
+              "channels": [
+                "hind_b.upper",
+                "hind_b.middle",
+                "hind_b.lower"
+              ],
+              "segment_weights": [
+                0.4,
+                0.2,
+                0.4
+              ]
+            }
+          ]
+        },
+        {
+          "id": "wing",
+          "weight": 1.0,
+          "exchange": true,
+          "chains": [
+            {
+              "channels": [
+                "wing_a.root_to_bend",
+                "wing_a.bend_to_tip_reference"
+              ],
+              "segment_weights": [
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "channels": [
+                "wing_b.root_to_bend",
+                "wing_b.bend_to_tip_reference"
+              ],
+              "segment_weights": [
+                1.0,
+                1.0
+              ]
+            }
+          ]
+        }
+      ],
+      "projections": {
+        "pony.quadruped@2draft1": {
+          "core.head": "core.head",
+          "core.neck": "core.neck",
+          "core.tail": "core.tail",
+          "core.body": "core.body",
+          "fore_a.upper": "fore_a.upper",
+          "fore_a.lower": "fore_a.lower",
+          "fore_b.upper": "fore_b.upper",
+          "fore_b.lower": "fore_b.lower",
+          "hind_a.upper": "hind_a.upper",
+          "hind_a.middle": "hind_a.middle",
+          "hind_a.lower": "hind_a.lower",
+          "hind_b.upper": "hind_b.upper",
+          "hind_b.middle": "hind_b.middle",
+          "hind_b.lower": "hind_b.lower",
+          "wing_a.root_to_bend": "wing_a.root_to_bend",
+          "wing_a.bend_to_tip_reference": "wing_a.bend_to_tip_reference",
+          "wing_b.root_to_bend": "wing_b.root_to_bend",
+          "wing_b.bend_to_tip_reference": "wing_b.bend_to_tip_reference"
+        }
+      },
+      "context": {}
+    },
+    {
+      "id": "whole.griffon.quadruped@draft1",
+      "label": "狮鹫结构示例 · 全部已存在部位（草案）",
+      "status": "draft",
+      "groups": [
+        {
+          "id": "head",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "core.head"
+              ],
+              "segment_weights": [
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "neck",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "core.neck"
+              ],
+              "segment_weights": [
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "tail",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "core.tail"
+              ],
+              "segment_weights": [
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "core.body"
+              ],
+              "segment_weights": [
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "front_legs",
+          "weight": 1.0,
+          "exchange": true,
+          "chains": [
+            {
+              "channels": [
+                "fore_a.upper",
+                "fore_a.lower"
+              ],
+              "segment_weights": [
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "channels": [
+                "fore_b.upper",
+                "fore_b.lower"
+              ],
+              "segment_weights": [
+                1.0,
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "back_legs",
+          "weight": 1.0,
+          "exchange": true,
+          "chains": [
+            {
+              "channels": [
+                "hind_a.upper",
+                "hind_a.middle",
+                "hind_a.lower"
+              ],
+              "segment_weights": [
+                0.4,
+                0.2,
+                0.4
+              ]
+            },
+            {
+              "channels": [
+                "hind_b.upper",
+                "hind_b.middle",
+                "hind_b.lower"
+              ],
+              "segment_weights": [
+                0.4,
+                0.2,
+                0.4
+              ]
+            }
+          ]
+        },
+        {
+          "id": "wing",
+          "weight": 1.0,
+          "exchange": true,
+          "chains": [
+            {
+              "channels": [
+                "wing_a.root_to_bend",
+                "wing_a.bend_to_tip_reference"
+              ],
+              "segment_weights": [
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "channels": [
+                "wing_b.root_to_bend",
+                "wing_b.bend_to_tip_reference"
+              ],
+              "segment_weights": [
+                1.0,
+                1.0
+              ]
+            }
+          ]
+        }
+      ],
+      "projections": {
+        "griffon.quadruped@draft1": {
+          "core.head": "core.head",
+          "core.neck": "core.neck",
+          "core.tail": "core.tail",
+          "core.body": "core.body",
+          "fore_a.upper": "fore_a.upper",
+          "fore_a.lower": "fore_a.lower",
+          "fore_b.upper": "fore_b.upper",
+          "fore_b.lower": "fore_b.lower",
+          "hind_a.upper": "hind_a.upper",
+          "hind_a.middle": "hind_a.middle",
+          "hind_a.lower": "hind_a.lower",
+          "hind_b.upper": "hind_b.upper",
+          "hind_b.middle": "hind_b.middle",
+          "hind_b.lower": "hind_b.lower",
+          "wing_a.root_to_bend": "wing_a.root_to_bend",
+          "wing_a.bend_to_tip_reference": "wing_a.bend_to_tip_reference",
+          "wing_b.root_to_bend": "wing_b.root_to_bend",
+          "wing_b.bend_to_tip_reference": "wing_b.bend_to_tip_reference"
+        }
+      },
+      "context": {}
+    },
+    {
+      "id": "whole.dragon.biped@draft1",
+      "label": "双足有翼龙结构示例 · 全部已存在部位（草案）",
+      "status": "draft",
+      "groups": [
+        {
+          "id": "head",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "core.head"
+              ],
+              "segment_weights": [
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "neck",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "core.neck"
+              ],
+              "segment_weights": [
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "tail",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "core.tail"
+              ],
+              "segment_weights": [
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "core.torso"
+              ],
+              "segment_weights": [
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "arm",
+          "weight": 1.0,
+          "exchange": true,
+          "chains": [
+            {
+              "channels": [
+                "arm_a.upper",
+                "arm_a.lower"
+              ],
+              "segment_weights": [
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "channels": [
+                "arm_b.upper",
+                "arm_b.lower"
+              ],
+              "segment_weights": [
+                1.0,
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "leg",
+          "weight": 1.0,
+          "exchange": true,
+          "chains": [
+            {
+              "channels": [
+                "leg_a.upper",
+                "leg_a.middle",
+                "leg_a.lower"
+              ],
+              "segment_weights": [
+                0.4,
+                0.2,
+                0.4
+              ]
+            },
+            {
+              "channels": [
+                "leg_b.upper",
+                "leg_b.middle",
+                "leg_b.lower"
+              ],
+              "segment_weights": [
+                0.4,
+                0.2,
+                0.4
+              ]
+            }
+          ]
+        },
+        {
+          "id": "wing",
+          "weight": 1.0,
+          "exchange": true,
+          "chains": [
+            {
+              "channels": [
+                "wing_a.root_to_bend",
+                "wing_a.bend_to_tip_reference"
+              ],
+              "segment_weights": [
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "channels": [
+                "wing_b.root_to_bend",
+                "wing_b.bend_to_tip_reference"
+              ],
+              "segment_weights": [
+                1.0,
+                1.0
+              ]
+            }
+          ]
+        }
+      ],
+      "projections": {
+        "dragon.biped@draft1": {
+          "core.head": "core.head",
+          "core.neck": "core.neck",
+          "core.tail": "core.tail",
+          "core.torso": "core.torso",
+          "arm_a.upper": "arm_a.upper",
+          "arm_a.lower": "arm_a.lower",
+          "arm_b.upper": "arm_b.upper",
+          "arm_b.lower": "arm_b.lower",
+          "leg_a.upper": "leg_a.upper",
+          "leg_a.middle": "leg_a.middle",
+          "leg_a.lower": "leg_a.lower",
+          "leg_b.upper": "leg_b.upper",
+          "leg_b.middle": "leg_b.middle",
+          "leg_b.lower": "leg_b.lower",
+          "wing_a.root_to_bend": "wing_a.root_to_bend",
+          "wing_a.bend_to_tip_reference": "wing_a.bend_to_tip_reference",
+          "wing_b.root_to_bend": "wing_b.root_to_bend",
+          "wing_b.bend_to_tip_reference": "wing_b.bend_to_tip_reference"
+        }
+      },
+      "context": {}
+    },
+    {
+      "id": "whole.hybrid.asymmetric@draft1",
+      "label": "不对称混合结构示例 · 全部已存在部位（草案）",
+      "status": "draft",
+      "groups": [
+        {
+          "id": "head",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "core.head"
+              ],
+              "segment_weights": [
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "neck",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "core.neck"
+              ],
+              "segment_weights": [
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "tail",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "core.tail"
+              ],
+              "segment_weights": [
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "core.torso_a",
+                "core.torso_b"
+              ],
+              "segment_weights": [
+                1.0,
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "front_legs",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "fore_a.upper",
+                "fore_a.lower"
+              ],
+              "segment_weights": [
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "channels": [
+                "fore_b.upper",
+                "fore_b.middle",
+                "fore_b.lower"
+              ],
+              "segment_weights": [
+                0.4,
+                0.2,
+                0.4
+              ]
+            }
+          ]
+        },
+        {
+          "id": "back_legs",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "hind_a.upper",
+                "hind_a.middle",
+                "hind_a.lower"
+              ],
+              "segment_weights": [
+                0.4,
+                0.2,
+                0.4
+              ]
+            },
+            {
+              "channels": [
+                "hind_b.upper",
+                "hind_b.lower"
+              ],
+              "segment_weights": [
+                1.0,
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "id": "wing",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "wing_a.root_to_bend",
+                "wing_a.bend_to_tip_reference"
+              ],
+              "segment_weights": [
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "channels": [
+                "wing_b.root_to_bend",
+                "wing_b.bend_to_tip_reference"
+              ],
+              "segment_weights": [
+                1.0,
+                1.0
+              ]
+            }
+          ]
+        }
+      ],
+      "projections": {
+        "hybrid.asymmetric@draft1": {
+          "core.head": "core.head",
+          "core.neck": "core.neck",
+          "core.tail": "core.tail",
+          "core.torso_a": "core.torso_a",
+          "core.torso_b": "core.torso_b",
+          "fore_a.upper": "fore_a.upper",
+          "fore_a.lower": "fore_a.lower",
+          "fore_b.upper": "fore_b.upper",
+          "fore_b.middle": "fore_b.middle",
+          "fore_b.lower": "fore_b.lower",
+          "hind_a.upper": "hind_a.upper",
+          "hind_a.middle": "hind_a.middle",
+          "hind_a.lower": "hind_a.lower",
+          "hind_b.upper": "hind_b.upper",
+          "hind_b.lower": "hind_b.lower",
+          "wing_a.root_to_bend": "wing_a.root_to_bend",
+          "wing_a.bend_to_tip_reference": "wing_a.bend_to_tip_reference",
+          "wing_b.root_to_bend": "wing_b.root_to_bend",
+          "wing_b.bend_to_tip_reference": "wing_b.bend_to_tip_reference"
+        }
+      },
+      "context": {}
+    },
+    {
+      "id": "cross_species.head_only@draft1",
+      "label": "跨物种仅头部（草案）",
+      "status": "draft",
+      "groups": [
+        {
+          "id": "head",
+          "weight": 1.0,
+          "exchange": false,
+          "chains": [
+            {
+              "channels": [
+                "head_facing"
+              ],
+              "segment_weights": [
+                1.0
+              ]
+            }
+          ]
+        }
+      ],
+      "projections": {
+        "pony.quadruped@2draft1": {
+          "head_facing": "core.head"
+        },
+        "griffon.quadruped@draft1": {
+          "head_facing": "core.head"
+        },
+        "dragon.biped@draft1": {
+          "head_facing": "core.head"
+        },
+        "hybrid.asymmetric@draft1": {
+          "head_facing": "core.head"
+        }
+      },
+      "context": {}
+    },
+    {
+      "id": "feather_wings@draft1",
+      "label": "羽翼局部姿态（草案）",
+      "status": "draft",
+      "groups": [
+        {
+          "id": "wing",
+          "weight": 1.0,
+          "exchange": true,
+          "chains": [
+            {
+              "channels": [
+                "wing_a.root_to_bend",
+                "wing_a.bend_to_tip_reference"
+              ],
+              "segment_weights": [
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "channels": [
+                "wing_b.root_to_bend",
+                "wing_b.bend_to_tip_reference"
+              ],
+              "segment_weights": [
+                1.0,
+                1.0
+              ]
+            }
+          ]
+        }
+      ],
+      "projections": {
+        "pony.quadruped@2draft1": {
+          "wing_a.root_to_bend": "wing_a.root_to_bend",
+          "wing_a.bend_to_tip_reference": "wing_a.bend_to_tip_reference",
+          "wing_b.root_to_bend": "wing_b.root_to_bend",
+          "wing_b.bend_to_tip_reference": "wing_b.bend_to_tip_reference"
+        },
+        "griffon.quadruped@draft1": {
+          "wing_a.root_to_bend": "wing_a.root_to_bend",
+          "wing_a.bend_to_tip_reference": "wing_a.bend_to_tip_reference",
+          "wing_b.root_to_bend": "wing_b.root_to_bend",
+          "wing_b.bend_to_tip_reference": "wing_b.bend_to_tip_reference"
+        }
+      },
+      "context": {}
+    }
+  ]
+}

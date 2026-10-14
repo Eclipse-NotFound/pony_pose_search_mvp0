@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>从一张姿势图，找回动画画面 · Pony Pose Search 图解</title>
+<style>
+:root{--paper:#f6f3ec;--card:#fffdf9;--ink:#242d35;--muted:#5a6670;--line:#d7dcd8;--purple:#7755a4;--teal:#087d80;--amber:#aa6515;--blue:#315dae;--rose:#b94560;--soft:#e8eee9}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 "Microsoft YaHei","PingFang SC",system-ui,sans-serif}a{color:var(--teal);text-underline-offset:4px}a:hover{text-decoration-thickness:2px}button,input,select{font:inherit}button,select,summary{cursor:pointer}button{border:1px solid #b8c2bd;border-radius:8px;padding:7px 13px;background:var(--card);color:var(--ink)}button:hover{background:#eaf3ef}button[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:#fff}button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible,select:focus-visible{outline:3px solid #bd791b;outline-offset:4px}input[type=range]{width:100%;accent-color:var(--teal)}svg{display:block;width:100%;height:auto;overflow:visible}svg text{font-family:"Microsoft YaHei","PingFang SC",sans-serif;fill:var(--ink)}img{display:block;max-width:100%;height:auto}figure{margin:0}figcaption{color:var(--muted);font-size:14px;line-height:1.6;margin-top:10px}h1,h2,h3,p{margin:0}h1{font-size:clamp(26px,3.5vw,42px);line-height:1.32;letter-spacing:-.025em}h2{font-size:clamp(24px,2.7vw,33px);line-height:1.38}h3{font-size:19px;line-height:1.5}.wrap{max-width:1100px;margin:auto;padding:0 28px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:21px 0 18px;border-bottom:1px solid var(--line);font-size:13px;letter-spacing:.08em}.topbar b{letter-spacing:.13em}.topbar span{color:var(--muted)}.hero{padding:25px 0 28px}.lead{margin:12px 0 22px;color:var(--muted);max-width:800px;font-size:18px}.eyebrow{font-size:13px;color:var(--teal);font-weight:700;letter-spacing:.12em;margin-bottom:8px}.hero-flow{display:grid;grid-template-columns:1fr 40px 1fr 40px 1fr;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);padding:18px;border-radius:15px}.hero-scene{min-width:0}.hero-scene h3{font-size:16px;margin-bottom:8px}.hero-scene .picture svg{height:215px;object-fit:contain}.hero-scene .tagline{display:block;font-size:14px;color:var(--muted);margin-top:8px}.connector{font-size:28px;text-align:center;color:var(--teal)}.takeaway{border-left:3px solid var(--teal);padding:9px 0 9px 15px;margin-top:16px;line-height:1.65;font-size:18px}.small{font-size:14px;color:var(--muted);line-height:1.7}.hint{font-size:14px;color:var(--muted);margin-top:12px}.toc{display:flex;flex-wrap:wrap;gap:7px 22px;padding:15px 0 24px;font-size:15px;border-bottom:1px solid var(--line)}.toc a{text-decoration:none}.chapter{padding:46px 0;border-bottom:1px solid var(--line)}.chapter-head{display:flex;align-items:baseline;gap:14px;margin-bottom:23px}.chapter-no{color:var(--teal);font-family:Georgia,serif;font-size:32px;line-height:1}.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}.two{display:grid;grid-template-columns:1fr 1fr;gap:24px}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.stage-label{font-size:14px;color:var(--muted);margin-bottom:8px}.flow-pair{display:grid;grid-template-columns:1.4fr 40px 1fr;gap:10px;align-items:center}.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.controls .small{margin-right:6px}.legend{display:flex;flex-wrap:wrap;gap:7px 18px;font-size:14px;color:var(--muted);margin:12px 0}.legend i{width:16px;height:5px;display:inline-block;vertical-align:middle;margin-right:5px;border-radius:2px}.borderless{border:0;background:transparent}.inspect-layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:24px;align-items:center}.inspect-img svg{max-height:430px}.chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:17px}.direction-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.direction-cell{background:#f1f3ee;border-radius:8px;min-width:0;text-align:center;padding:4px}.direction-cell svg{height:55px}.direction-cell span{font-size:12px;display:block;padding-bottom:3px}.direction-cell.dim{opacity:.25}.range-row{display:grid;grid-template-columns:88px 1fr 68px;gap:12px;align-items:center;margin:13px 0;font-size:15px}.range-row output{text-align:right;font-variant-numeric:tabular-nums}.formula{font-size:18px;letter-spacing:.025em;font-family:Georgia,"Microsoft YaHei",serif}.badge{display:inline-block;padding:2px 8px;border:1px solid var(--line);border-radius:5px;font-size:13px;line-height:1.6}.badge.green{color:var(--teal);background:#edf6f2;border-color:#c0dad2}.badge.orange{color:#92570c;background:#faf0df;border-color:#e4c790}details{margin-top:18px;border-top:1px dashed #c6ccc8;padding-top:13px;font-size:15px}summary{color:var(--teal);font-weight:500}details p{margin:12px 0 0;max-width:80ch}details ul{padding-left:23px;margin:12px 0}details li{margin:6px 0}code{background:#ecece6;border-radius:3px;padding:1px 4px;font-size:.9em;overflow-wrap:anywhere}.inset{background:#eeefe8;border-radius:8px;padding:13px 16px;margin-top:16px}.score-layout{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:30px}.score-readout{font-family:Georgia,serif;font-size:50px;color:var(--teal);line-height:1.25}.score-label{font-size:15px;color:var(--muted)}.preset-buttons{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.weight-demo{margin-top:22px}.weight-results{display:grid;grid-template-columns:1fr 1fr;gap:20px}.weight-candidate{border-top:3px solid var(--purple);padding-top:10px}.weight-candidate:nth-child(2){border-top-color:var(--teal)}.bar-track{height:12px;border-radius:2px;background:#e1e5de;margin:10px 0 6px}.bar-track span{display:block;height:100%;background:var(--purple);transition:width .2s}.weight-candidate:nth-child(2) .bar-track span{background:var(--teal)}.score-numeric{display:flex;justify-content:space-between;font-size:16px}.note{color:#7b591e;background:#fbf3e5;border-left:3px solid #cf994d;padding:11px 15px;font-size:15px;margin-top:18px}.lane{display:grid;grid-template-columns:100px 1fr 28px 1fr 28px 1fr;align-items:center;gap:10px;padding:20px 0;border-bottom:1px solid var(--line)}.lane:last-child{border-bottom:0}.lane-title{font-size:16px}.lane .svg-wrap svg{height:166px}.lane .svg-wrap p{text-align:center;font-size:14px;margin-top:6px}.lane .arrow{color:var(--teal);text-align:center;font-size:25px}.caption-row{display:flex;justify-content:space-between;gap:12px;font-size:14px;color:var(--muted);margin-top:10px}.training-visual{display:grid;grid-template-columns:150px minmax(230px,1fr) minmax(180px,.8fr);gap:25px;align-items:center}.training-visual .example-thumb svg{height:168px}.training-visual svg{max-height:250px}.loop-back{border:2px solid var(--teal);border-top:0;border-radius:0 0 20px 20px;margin:0 80px;padding:11px 10px 10px;text-align:center;font-size:15px;color:var(--teal)}.split-viz{display:grid;grid-template-columns:1.6fr 1fr;gap:25px;align-items:start}.dot-grid{display:flex;gap:4px;flex-wrap:wrap;align-items:center;min-height:28px}.data-dot{height:10px;width:10px;border-radius:2px;display:block;background:var(--teal)}.data-dot.ai{background:var(--purple)}.split-row{margin-top:20px}.split-row strong{display:block;font-size:16px;margin-bottom:8px}.split-row p{font-size:14px;color:var(--muted);margin-top:6px}.split-stack{display:flex;height:25px;background:#e4e7e1;margin:10px 0;overflow:hidden;border-radius:3px}.split-stack span{display:block;height:100%}.experiment-equation{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;margin-top:22px;font-size:17px}.experiment-equation b{font-size:23px}.stat-chart{width:100%;display:block}.table-scroll{overflow:auto;margin-top:16px}table{border-collapse:collapse;width:100%;font-size:14px;text-align:left}td,th{padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap}th{font-weight:500;color:var(--muted)}.result-tabs{margin-bottom:20px}.component-chart{display:grid;grid-template-columns:1fr 1fr;gap:28px}.component-row{margin-top:14px}.component-bars{display:grid;grid-template-columns:48px 1fr 66px;gap:9px;align-items:center;font-size:14px;margin-top:6px}.component-bars .track{background:#e9e9e1;height:15px}.component-bars .track i{height:15px;display:block;background:#c3c9bf}.component-bars.after .track i{background:var(--teal)}.component-bars.after.worse .track i{background:var(--rose)}.component-bars span:last-child{text-align:right}.status-track{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}.status-track h3{margin:10px 0}.status-track p{font-size:15px;color:var(--muted)}.status-track .outline{border:2px dashed #b8bfbc;background:transparent}.sources{font-size:15px;display:grid;grid-template-columns:1fr 1fr;gap:24px}.sources a{display:block;margin:9px 0}.footer{padding:25px 0 45px;font-size:13px;color:var(--muted)}[hidden]{display:none!important}.print-only{display:none}
+@media(max-width:780px){.wrap{padding:0 20px}.hero-flow{grid-template-columns:1fr 22px 1fr;gap:3px;padding:14px}.hero-scene:last-child{grid-column:1/-1;border-top:1px solid var(--line);padding-top:12px;margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:center}.hero-scene:last-child h3{grid-column:1/-1}.hero-scene:last-child .picture svg{height:128px}.hero-flow>.connector:nth-child(4){display:none}.hero-scene .picture svg{height:170px}.two,.three,.inspect-layout,.score-layout,.component-chart,.status-track,.split-viz{grid-template-columns:1fr}.flow-pair{grid-template-columns:1fr 24px 1fr}.lane{grid-template-columns:1fr 24px 1fr 24px 1fr;gap:5px}.lane-title{grid-column:1/-1}.lane .svg-wrap svg{height:145px}.training-visual{grid-template-columns:100px 1fr;gap:16px}.training-visual .error-visual{grid-column:1/-1}.training-visual .error-visual svg{max-height:195px}.loop-back{margin:0 20px}.sources{grid-template-columns:1fr}.panel{padding:18px}.chapter{padding:34px 0}.chapter-head{gap:10px}.takeaway{font-size:17px}.direction-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:440px){body{font-size:16px}.wrap{padding:0 16px}.topbar{padding:15px 0;font-size:11px;letter-spacing:0}.topbar b{letter-spacing:.05em}.hero{padding-top:20px}.lead{font-size:16px;margin:10px 0 16px}.hero-scene h3{font-size:14px}.hero-scene .tagline{font-size:12px}.hero-scene .picture svg{height:145px}.hero-scene:last-child .picture svg{height:125px}.hero-flow{padding:11px}.hero-flow>.connector{font-size:22px}.hero-scene:last-child{gap:5px}.hero{padding-bottom:16px}.hint{font-size:13px}.toc{font-size:14px;gap:7px 16px}.panel{padding:14px}.flow-pair{grid-template-columns:1fr}.flow-pair .connector{transform:rotate(90deg);height:29px;line-height:25px}.flow-pair .cropped svg{max-height:210px}.two{gap:16px}.chapter-head{margin-bottom:18px}.chapter-no{font-size:27px}.lane{grid-template-columns:1fr 18px 1fr 18px 1fr;gap:0}.lane .svg-wrap svg{height:105px}.lane .svg-wrap p{font-size:12px;line-height:1.5}.lane .arrow{font-size:19px}.weight-results{gap:16px}.range-row{grid-template-columns:68px 1fr 56px;gap:8px;font-size:14px}.training-visual{grid-template-columns:80px 1fr;gap:10px}.loop-back{margin:0}.note{font-size:14px}.chapter-head h2{font-size:23px}.score-readout{font-size:44px}.controls button{padding:6px 10px;font-size:14px}.experiment-equation{gap:6px;font-size:14px}.experiment-equation b{font-size:19px}.status-track{gap:14px}.sources{gap:12px}}
+.stat-chart{max-width:780px;margin:auto}.example-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:18px}.example-strip svg{height:150px}.example-strip figcaption{text-align:center}
+@media(max-width:540px){.lane{grid-template-columns:1fr;gap:6px}.lane-title{margin-bottom:10px}.lane .svg-wrap svg{height:185px;max-width:270px;margin:auto}.lane .svg-wrap p{font-size:14px;margin-top:5px}.lane .arrow{transform:rotate(90deg);height:29px;line-height:26px}.example-strip{grid-template-columns:1fr}.example-strip svg{height:180px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bar-track span{transition:none}}
+@media print{body{background:white;font-size:12px}.wrap{max-width:100%;padding:0}.topbar,.toc,.controls,.range-row,.preset-buttons{display:none}.chapter{break-inside:avoid;padding:20px 0}.hero-flow{grid-template-columns:1fr 30px 1fr 30px 1fr}.two{grid-template-columns:1fr 1fr}.panel{padding:12px}.print-only{display:block}.hero-scene:last-child{display:block;grid-column:auto;border:0}.takeaway{font-size:14px}details{display:block}summary{display:none}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="topbar"><b>PONY POSE SEARCH / 项目图解</b><span>给第一次接触这个项目的你</span></header>
+<section class="hero" id="start">
+<h1>给一张姿势图，<br>找回相似的动画画面。</h1>
+<p class="lead">把身体和四肢变成一组方向箭头，再去比较哪一帧的箭头最像。</p>
+<figure class="hero-flow" aria-label="同一张图片先提取各部位方向，再用这些方向寻找相似站姿的示意">
+ <div class="hero-scene"><h3>你想找的姿势</h3><div class="picture" id="hero-query"></div><span class="tagline">前腿斜向下，身体接近水平</span></div>
+ <div class="connector" aria-hidden="true">→</div>
+ <div class="hero-scene"><h3>只留各部位的朝向</h3><div class="picture" id="hero-directions"></div><span class="tagline">同色箭头对应同一部位</span></div>
+ <div class="connector" aria-hidden="true">→</div>
+ <div class="hero-scene"><h3>返回相近画面与出处</h3><div class="picture" id="hero-result"></div><span class="tagline"><b>第 1 季 · 第 15 集</b><br>00:24 · 相似站姿示例</span></div>
+</figure>
+<p class="hint">上图用真实帧和 AI 待审标注解释原理，配对仅作示例；正式搜索会对已处理样本逐一评分。</p>
+</section>
+<nav class="toc" aria-label="阅读导航"><a href="#prepare">① 图片从哪来</a><a href="#points">② 点怎样变箭头</a><a href="#compare">③ 怎样比较</a><a href="#models">④ AI 怎样学</a><a href="#experiment">⑤ 实验说明什么</a><a href="#now">⑥ 现在能做什么</a></nav>
+
+<section class="chapter" id="prepare">
+<div class="chapter-head"><span class="chapter-no">01</span><h2>先把视频，变成带出处的图片卡片。</h2></div>
+<figure class="panel">
+<div class="flow-pair"><div><div class="stage-label">整帧 · 第 15 集 00:20</div><div id="full-frame"></div></div><div class="connector" aria-hidden="true">→</div><div class="cropped"><div class="stage-label">按框裁出目标角色</div><div id="crop-example"></div></div></div>
+<div class="caption-row"><span>每秒抽一帧 → 挑选可用图 → 框住暮光</span><span>保留集数、时间与原图路径</span></div>
+<figcaption>只处理目标角色，避免旁边的角色和大片背景占满画面。</figcaption>
+</figure>
+<p class="takeaway">每张卡片同时保存“姿势是什么”和“它出现在视频的哪里”。</p>
+<details><summary>为什么不能把整部视频直接扔进搜索框？</summary><p>视频包含大量重复、模糊、遮挡和没有目标角色的画面。现有流程先每秒抽一张静态帧，由人筛选并画角色框，再按框自动裁剪。实验中也用检测器建议裁剪框；这个检测器负责找角色的位置，不负责判断四肢朝向。</p><p>抽帧是取样：默认每秒一张可能漏掉很短的姿势。当前搜索的是已经处理并入库的静态画面，不是逐帧理解所有视频，也不生成新的动画。</p><p>对应程序：M01 抽帧、M02 筛图、M03 框选、M04 裁剪。图中框和裁剪来自同一帧、同一份现有记录。</p></details>
+</section>
+
+<section class="chapter" id="points">
+<div class="chapter-head"><span class="chapter-no">02</span><h2>参考点是落笔处；箭头才是要比较的东西。</h2></div>
+<figure class="panel">
+<div class="controls" aria-label="图片显示方式"><span class="small">看同一张图：</span><button data-view="image" aria-pressed="false">原图</button><button data-view="points" aria-pressed="false">21 个参考点</button><button data-view="directions" aria-pressed="true">14 段方向</button></div>
+<div class="legend"><span><i style="background:var(--purple)"></i>头 / 颈</span><span><i style="background:var(--amber)"></i>身体 / 尾巴</span><span><i style="background:var(--teal)"></i>前腿</span><span><i style="background:var(--blue)"></i>后腿</span></div>
+<div class="inspect-layout"><div class="inspect-img" id="pose-inspector"></div><div><div class="chips" aria-label="选择要看的部位"><button data-part="all" aria-pressed="true">全部</button><button data-part="head" aria-pressed="false">头颈</button><button data-part="body" aria-pressed="false">身体与尾巴</button><button data-part="front" aria-pressed="false">前腿</button><button data-part="back" aria-pressed="false">后腿</button></div><div id="direction-grid" class="direction-grid"></div><p class="hint" id="part-description">头、颈、身体、尾巴各 1 段；两条前腿各 2 段，两条后腿各 3 段。</p></div></div>
+<figcaption>左图的箭头保留落点，方便人对照身体；右侧把箭头摆在同样大小的格子里，只比较朝向。</figcaption>
+</figure>
+<p class="takeaway">“向量”在这里就是一根方向箭头：用两个数字记下它往哪边指。</p>
+<details><summary>21 个点，为什么能得到 14 段方向？</summary><p>一段方向需要起点和终点，相邻腿段共用中间点。头、颈、身体、尾巴是 4 段；前腿共 4 段；后腿共 6 段，合计 14 段。不同方向并不需要各自独占两个点。</p><p>这里的“向量”是画面平面里的左右、上下朝向，不是聊天模型中表示文字含义的那种向量。箭头也不表示移动速度：一张静态图只有摆出的姿势，没有前后时刻的运动信息。</p><p>示例是第 15 集 00:20 的 AI 待审参考。这里只读展示，不会将其变成人工审核通过的标注。</p></details>
+</section>
+
+<section class="chapter" id="normalize">
+<div class="chapter-head"><span class="chapter-no">03</span><h2>一根长箭头、一根短箭头，可以指向同一个方向。</h2></div>
+<figure class="panel">
+<div class="two"><div><div class="stage-label">图里的两个点：位置、间距会变</div><div id="normalize-before"></div><div class="range-row"><label for="length">两点距离</label><input id="length" type="range" min="35" max="125" value="80"><output id="length-value" for="length">80</output></div><div class="range-row"><label for="shift">一起平移</label><input id="shift" type="range" min="0" max="65" value="24"><output id="shift-value" for="shift">24</output></div></div><div><div class="stage-label">统一成长度 1：只留下方向</div><div id="normalize-after"></div><p class="formula" style="text-align:center">[0.6, 0.8]</p><p class="small" style="text-align:center;margin-top:8px">向右 0.6，向下 0.8<br>拖动左侧滑块，这一对数字不变。</p></div></div>
+<figcaption>示意坐标；图片坐标向右、向下为正。统一箭头长度这一步，叫“归一化”。</figcaption>
+</figure>
+<p class="takeaway">角色在图里挪了位置、按同一比例放大，方向仍然可以相同。</p>
+<details><summary>它保留了什么，又舍弃了什么？</summary><p>程序先用“终点坐标 − 起点坐标”得到横向和纵向差，再把它们同时除以箭头长度。因此不再比较角色在画面中的绝对位置，也不比较这段肢体的长度。</p><p>它仍保留画面中的朝向。镜像、转身、旋转图片会改变方向；左右和上下不等比例地拉伸图片，也可能改变角度。不同的三维姿势还可能在二维画面上看起来很像，当前表示无法恢复完整的立体关节关系。</p><p>公式：<code>方向 = (终点 − 起点) ÷ 两点距离</code>。两点重合时没有方向，记为不可用。</p></details>
+</section>
+
+<section class="chapter" id="conventions">
+<div class="chapter-head"><span class="chapter-no">04</span><h2>先约好“箭头指什么”，答案才有可比性。</h2></div>
+<div class="two">
+<figure class="panel"><h3>尾巴：记录从身体伸出的初始朝向</h3><svg viewBox="0 0 360 255" role="img" aria-label="尾巴从身体向右上伸出，随后弯曲下垂，标注箭头只指向最初的右上方向"><defs><marker id="tailTip" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6Z" fill="#aa6515"/></marker></defs><ellipse cx="95" cy="151" rx="62" ry="54" fill="#ded4e8"/><path d="M146 123 C210 45 282 45 272 123 C268 168 225 205 206 229" fill="none" stroke="#c8b5d9" stroke-width="27" stroke-linecap="round"/><path d="M147 122L213 61" stroke="#aa6515" stroke-width="5" marker-end="url(#tailTip)"/><circle cx="147" cy="122" r="6" fill="#aa6515" stroke="white" stroke-width="2"/><circle cx="209" cy="65" r="5" fill="#aa6515"/><text x="39" y="159" font-size="17">身体</text><text x="94" y="98" font-size="15">尾根</text><text x="202" y="33" font-size="15">方向参考点</text><path d="M213 38L210 58" stroke="#aa6515"/><text x="220" y="207" font-size="15">实际尾尖</text><text x="220" y="228" font-size="13">不作方向终点</text></svg><figcaption>尾巴弯曲、下垂，不改变“最初从哪里往外伸”的定义。</figcaption></figure>
+<figure class="panel"><h3>腿根：落在与身体连接的区域中间</h3><svg viewBox="0 0 360 255" role="img" aria-label="两条后腿连接身体的区域中心各有一个腿根点，后躯中心放在两腿连接处之间"><ellipse cx="179" cy="92" rx="99" ry="61" fill="#ded4e8"/><path d="M116 114L111 199L143 217L155 125M208 126L206 203L240 213L250 113" fill="#e3dbea" stroke="#b59fc9" stroke-width="2"/><ellipse cx="136" cy="126" rx="29" ry="17" fill="#d6e8e2" stroke="#087d80" stroke-dasharray="4 4"/><ellipse cx="229" cy="126" rx="29" ry="17" fill="#d6e8e2" stroke="#087d80" stroke-dasharray="4 4"/><circle cx="136" cy="126" r="6" fill="#087d80"/><circle cx="229" cy="126" r="6" fill="#087d80"/><circle cx="182" cy="119" r="6" fill="#aa6515"/><path d="M182 55L182 108" stroke="#aa6515"/><text x="144" y="44" font-size="16">后躯中心</text><text x="80" y="246" font-size="15">腿根 1</text><text x="210" y="246" font-size="15">腿根 2</text><path d="M134 137L118 221M229 137L232 221" stroke="#087d80"/><text x="104" y="79" font-size="13">两处连接之间</text></svg><figcaption>这是落点规则示意；真实透视下，两处连接不一定水平并排。</figcaption></figure>
+</div>
+<p class="takeaway">有些点只是帮助画方向的参考点，不必对应一个明确的骨头或轮廓尖端。</p>
+<details><summary>这些规则与人工审核是什么关系？</summary><p>头部前方点、颈部端点也是方向参考。腿根按连接区中间判断，后躯中心按两后腿连接处之间判断，不套一个固定的像素偏移。结构清楚的直腿允许近似标中间关节点，无法可靠判断的部位留空。</p><p>用户确认标注口径，与逐张确认具体坐标是两件事。AI 扩充的标注一直保留“待审、实验用”身份；浏览本说明或标注预览不会改变其审核状态。</p></details>
+</section>
+
+<section class="chapter" id="compare">
+<div class="chapter-head"><span class="chapter-no">05</span><h2>两个箭头越同向，这一段就越像。</h2></div>
+<figure class="panel">
+<div class="score-layout"><div id="angle-figure"></div><div><div class="score-label">这一段的相似分</div><output class="score-readout" id="angle-score" for="angle" aria-live="polite">0.85</output><div class="range-row"><label for="angle">夹角</label><input id="angle" type="range" min="0" max="180" value="45"><output id="angle-value" for="angle">45°</output></div><div class="preset-buttons"><button data-angle="0">同向 0°</button><button data-angle="90">直角 90°</button><button data-angle="180">反向 180°</button></div><p class="hint">紫色虚线：你要找的方向<br>绿色实线：候选画面的方向</p></div></div>
+<figcaption>单段分数在 0～1 之间：同向为 1，直角为 0.5，反向为 0。</figcaption>
+</figure>
+<p class="takeaway">搜索比较的是方向的接近程度；0.9 分不等于“有 90% 的概率正确”。</p>
+<figure class="panel weight-demo">
+<h3>更在意哪一部分，就让它对总分影响更大。</h3>
+<div class="range-row"><label for="leg-weight">更重视腿</label><input id="leg-weight" type="range" min="0" max="100" step="5" value="30"><output id="leg-weight-value" for="leg-weight">30%</output></div>
+<div class="weight-results"><div class="weight-candidate"><h3>A · 头很像，腿差得多</h3><div id="weight-a"></div><div class="bar-track"><span id="weight-bar-a"></span></div><div class="score-numeric"><span>综合分</span><b id="weight-score-a"></b></div></div><div class="weight-candidate"><h3>B · 头稍偏，腿很像</h3><div id="weight-b"></div><div class="bar-track"><span id="weight-bar-b"></span></div><div class="score-numeric"><span>综合分</span><b id="weight-score-b"></b></div></div></div>
+<p class="hint" id="weight-winner" aria-live="polite"></p>
+<figcaption>用头和一段腿演示“权重”；相似分由上面的同一公式计算。这里只改变演示，不修改项目配置。</figcaption>
+</figure>
+<details><summary>程序里完整的评分和结果是什么？</summary><p>单段计算式是 <code>(1 + 两个单位方向的点积) ÷ 2</code>。“点积”可以理解为量两个箭头有多同向。方向完全相反会从负值转换为 0 分。</p><p>完整检索区分头、颈、身体、尾巴、前腿、后腿的权重，腿内部也有不同腿段的权重。汇总时还考虑哪些方向有参考、哪些候选部位缺失，以及同类两条腿怎么对应。不是把 21 个点的像素距离直接相加。</p><p>搜索会给已入库样本算分、按分数排序，生成含集数、时间、原图、裁剪图和部位评分的结果网页。目前控制台配置默认保留前 15 项，用户可以调整搜索条件。</p></details>
+</section>
+
+<section class="chapter" id="missing">
+<div class="chapter-head"><span class="chapter-no">06</span><h2>看不见的部分留空，看得见的部分仍有价值。</h2></div>
+<div class="two">
+<figure class="panel"><h3>腿的下半段被挡住</h3><div id="occlusion-source"></div><figcaption>只有腿根和中间点可判断，末端不知道在哪里。</figcaption></figure>
+<figure class="panel"><h3>两种保存方式</h3><div id="occlusion-out"></div><figcaption>较新的 v2 支持逐段保留；现有控制台默认仍是 v1，需显式选择 v2。</figcaption></figure>
+</div>
+<p class="takeaway">没有答案就不硬猜；“部分相似”也不能自动当成“全身相似”。</p>
+<div class="two" style="margin-top:24px"><figure class="panel"><h3>两条腿的编号可以交换</h3><div id="leg-assignment"></div><figcaption>一整条腿始终与另一整条腿对应，不能把不同腿的上、下段拼在一起凑高分。</figcaption></figure><div class="panel"><h3>查询图与候选图，缺失的意义不同</h3><div id="missing-score"></div><p class="small">查询没给出的方向：跳过。<br>查询要求了、候选却缺少：按配置降低评分。</p></div></div>
+<details><summary>为什么要区分这两种缺失？</summary><p>查询图里只看见上半身，等于你没有对后腿提出要求；不能因此扣每张候选的分。但查询清楚地要求“前腿抬起”，某个候选连前腿都看不见，就不能把它当成已满足要求。</p><p>旧表示 v1 在一条腿缺任一必需点时，整条腿不可用；v2 分别记录各段是否可用。评分中的缺失惩罚强弱可以配置。没有任何可比较部位的候选不能凭空得到相似分。</p><p>同类腿采用整体对应：查询前腿 1 可以对应候选前腿 2，但这条腿的全部腿段必须一起对应过去；后腿同理。它缓解“左右编号”的歧义，不会消除遮挡和画面透视本身的不确定性。</p></details>
+</section>
+
+<section class="chapter" id="models">
+<div class="chapter-head"><span class="chapter-no">07</span><h2>AI 有两条路，终点都是这些方向箭头。</h2></div>
+<figure class="panel">
+<div class="lane"><div class="lane-title"><b>A · 先找点</b><br><span class="badge green">现有对照路线</span></div><div class="svg-wrap"><div id="route-a-image"></div><p>裁好的角色图</p></div><span class="arrow">→</span><div class="svg-wrap"><div id="route-a-points"></div><p>预测 21 个点的位置</p></div><span class="arrow">→</span><div class="svg-wrap"><div id="route-a-arrows"></div><p>相邻点相减 → 方向</p></div></div>
+<div class="lane"><div class="lane-title"><b>B · 直接给方向</b><br><span class="badge orange">正在实验</span></div><div class="svg-wrap"><div id="route-b-image"></div><p>同样的角色图</p></div><span class="arrow">→</span><div class="svg-wrap"><div id="route-b-numbers"></div><p>直接预测方向数字</p></div><span class="arrow">→</span><div class="svg-wrap"><div id="route-b-arrows"></div><p>直接得到 14 个朝向</p></div></div>
+<figcaption>结构示意，图中展示的是参考答案，不是模型已经全部预测正确。</figcaption>
+</figure>
+<p class="takeaway">可以让模型直接预测方向；它能不能更准，需要用同一批图片比较。</p>
+<p class="note">直接方向模型只给“往哪指”，不给“从画面哪里开始画”。人工参考点仍可用于标注、对照与审核。</p>
+<details><summary>两种模型内部具体做了什么？</summary><p>两种实验模型都用同一个起点：已学过一般图像特征的 ResNet18。可以把它理解为一套从图片中提取线条、形状组合的可调节识别器。本轮继续训练整套识别器，并不是只在最后加一个固定规则。</p><p>A 路线为每个点输出一张 28×28 的“位置可能性图”：哪里数值大，就更像这个点应该在的位置。程序从图中读出坐标，再按统一规则换成方向。B 路线直接输出 14 组二维数字，并把每组统一成长度 1。</p><p>两种模型还分别预测这 14 段是否可用。方向预测时没有实际参考点坐标；如果要把箭头画回身体附近，需要额外定位或给出展示用的位置。</p><p>两条路线的训练答案来自同一批标注：A 读取坐标，B 读取这些坐标换算出的方向。本实验没有单独比较“人直接画箭头”与“人先点参考点”哪种标注方式更省时或更准确。</p></details>
+</section>
+
+<section class="chapter" id="learn">
+<div class="chapter-head"><span class="chapter-no">08</span><h2>训练，就是用有答案的例图，反复纠正预测。</h2></div>
+<figure class="panel">
+<div class="training-visual"><div class="example-thumb"><div id="train-image"></div><p class="small" style="text-align:center">带答案的图片</p></div><div><svg viewBox="0 0 310 215" role="img" aria-label="识别器里有许多可调参数，图片经过它输出方向预测"><rect x="17" y="20" width="276" height="176" rx="15" fill="#eeefe8" stroke="#c7cec7"/><text x="155" y="54" font-size="17" text-anchor="middle">可以调节的识别器</text><g stroke="#9ca7a0" stroke-width="4"><path d="M53 83H255M53 119H255M53 155H255"/></g><g fill="#087d80" stroke="white" stroke-width="2"><circle cx="99" cy="83" r="10"/><circle cx="198" cy="119" r="10"/><circle cx="145" cy="155" r="10"/></g></svg><p class="small" style="text-align:center">调节的是模型中的数字参数</p></div><div class="error-visual"><div id="training-error"></div><p class="small" style="text-align:center">比较预测与参考的偏差</p></div></div>
+<div class="loop-back">↶ 用偏差更新参数，再看下一批图片</div>
+<figcaption>训练机制示意。一次更新针对当批例图，不能保证所有新图片都同时变好。</figcaption>
+</figure>
+<p class="takeaway">增加标注，是增加“带参考答案的例子”；例子的质量和种类也会影响学习。</p>
+<details><summary>为什么不用把训练图片背得越熟越好？</summary><p>目标是遇到没拿来训练的画面也能判断。模型可能学会背景、某个镜头的轮廓，甚至反复记住相邻的几帧，却没有学会更一般的腿部姿态。这叫“过拟合”，也就是练习题很熟，换题表现未必好。</p><p>因此要把练习、选模型、检验表现的图片分开。同一时刻的重复图、相邻的几乎相同的画面，不能随意两边放，否则检验会过于容易。增加 200 张图片也不一定增加了 200 种独立姿势。</p><p>关键点路线主要纠正点的位置可能性和坐标偏差；方向路线主要纠正朝向偏差。两者都会学习哪些方向有可用参考。本轮 AI 标签的训练权重设为人工标签的一半，但这不能保证 AI 标签没有错误。</p></details>
+</section>
+
+<section class="chapter" id="experiment">
+<div class="chapter-head"><span class="chapter-no">09</span><h2>这次实验：题库变大，其他条件尽量一致。</h2></div>
+<figure class="panel">
+<div class="split-viz"><div><h3>训练题库 · 只用第 15 集</h3><div id="nested-datasets"></div><div class="legend"><span><i style="background:var(--teal)"></i>32 张人工图</span><span><i style="background:var(--purple)"></i>AI 待审图</span></div><p class="small">三档逐层包含；条带长度按真实图片数绘制。</p></div><div><h3>参考图固定，单独放一边</h3><div class="split-row"><strong>4 张人工验证 · 第 15 集</strong><div class="dot-grid" id="val-dots"></div><p>用来挑保存哪一次更新的模型</p></div><div class="split-row"><strong>12 张人工检验 · 第 24 集</strong><div class="dot-grid" id="test-dots"></div><p>不参加训练，也不用于挑保存时点</p></div><div class="split-row"><strong>16 张 AI 参考 · 第 24 集</strong><div class="dot-grid" id="ai-dots"></div><p>只作补充观察，与人工成绩分开</p></div></div></div>
+<div class="experiment-equation"><span><b>3</b> 档数量</span><span>×</span><span><b>2</b> 条路线</span><span>×</span><span><b>3</b> 次重复</span><span>＝</span><span><b>18</b> 次训练</span></div>
+<figcaption>每次都更新 1,200 次参数，每批 12 张。同档、同一次重复的两路线，使用相同图片顺序和图片变化。</figcaption>
+</figure>
+<p class="takeaway">比较两条路线时，用同一批题；比较数量时，不让大题库偷偷多训练几倍。</p>
+<p class="note">303 张训练图中，271 张是 AI 待审标注。人工检验仅 12 张，且已用于前两轮观察；它不是一场新的盲测。</p>
+<details><summary>这次增加了多少？哪些因素还没有分开？</summary><p>本轮新增 200 张视觉标注，其中 40 张用已有裁剪，160 张从完整帧重新裁出角色，新增 2,987 个有坐标的点和 1,892 个可判断方向。训练集由 103 张变成 303 张。加上单独的 4＋12＋16 张参考，实验清单共 335 张。</p><div class="example-strip"><figure><div id="diversity-0"></div><figcaption>00:20 · 站立</figcaption></figure><figure><div id="diversity-1"></div><figcaption>00:24 · 仍是相近站姿</figcaption></figure><figure><div id="diversity-2"></div><figcaption>18:13 · 不同的跃起姿势</figcaption></figure></div><p>每次重复采用不同的固定随机起点，看看结果会不会随训练偶然性大幅变化。新增训练图排除了人工验证保留时段；图像内容没有完全重复，但新增选择中有 68 对相邻时间差不超过 2 秒。</p><p>人工训练图一直是 32 张，AI 图越来越多，因此改变的不只是数量，还有姿势分布和标签来源比例。每张图平均被看到的次数也随题库变大而下降。此次只能评估这套扩充方案，不能把变化全部归因于数量一个因素。</p><p>新标注不是用被测姿态模型自己预测的点直接充当答案；角色检测器仅用于建议框，点位经过逐图视觉标注和全部叠加图检查，但尚未得到用户逐张确认。</p></details>
+</section>
+
+<section class="chapter" id="results">
+<div class="chapter-head"><span class="chapter-no">10</span><h2>更多图片带来局部收益，还没有稳定胜出。</h2></div>
+<figure class="panel">
+<div class="controls result-tabs" aria-label="选择模型评估时点"><button data-selection="best" aria-pressed="true">验证图选出的模型</button><button data-selection="final" aria-pressed="false">统一训练结束时</button></div>
+<picture><source id="learning-chart-mobile" media="(max-width:540px)"><img class="stat-chart" id="learning-chart" alt="训练数量103、203、303张下，关键点路线和直接方向路线的人工参考方向误差；越低越好。"></picture>
+<div class="table-scroll"><table><caption class="small">12 张人工参考 · 3 次训练的均值 ± 标准差（度）</caption><thead><tr><th>训练图数</th><th>关键点 → 方向</th><th>直接预测方向</th></tr></thead><tbody id="results-table"></tbody></table></div>
+<figcaption>图中竖线表示 3 次训练的波动，不是对所有未来图片的保证区间。平均方向误差是“偏了多少度”，不是准确率。</figcaption>
+</figure>
+<p class="takeaway" id="results-takeaway">303 张时，两条路线的平均误差较低；203 张没有整体改善，直接预测方向仍未超过关键点路线。</p>
+<figure class="panel" style="margin-top:24px"><h3>再拆开身体部位，就会看到另一面。</h3><div class="component-chart" id="component-chart"></div><figcaption>12 张人工参考、验证选择模型、3 次平均；条长按角度绘制，越短越好。仅突出头部与后腿，完整部位表在原始验证记录中。</figcaption></figure>
+<p class="note">头部更准，后腿却更偏。统一训练结束时，关键点路线的整体改善也消失了；不能只取一个有利均值就宣布“全面提准”。</p>
+<details><summary>为什么总体数字变好，腿却可能变差？</summary><p>主指标先在每张图片内平均，再把图片平均。头部特写和全身图各算一张，头部进步可能压过腿部退步。改为汇总全部有效方向时，关键点误差由 13.68° 升到 14.88°；直接方向约为 18.88° 到 18.76°，基本持平。</p><p>16 张 AI 待审参考上，关键点路线的改善更一致；但这些参考答案也来自 AI，不能混入人工成绩来增强结论。12 张人工图太少且已反复使用，新的镜头、新的集数和不同抽样方案仍缺独立验证。</p><p>本轮测的是裁剪图上的方向误差，没有测整帧角色检测、最终搜索排名是否更合心意、或用户审核耗时。也还没拆分后腿退步来自选图分布、标注误差还是人工标签占比下降。</p></details>
+</section>
+
+<section class="chapter" id="now">
+<div class="chapter-head"><span class="chapter-no">11</span><h2>现在：检索流程已贯通，自动识别仍在验证。</h2></div>
+<figure class="status-track">
+<div class="panel"><span class="badge green">已经可用</span><div id="status-search"></div><h3>人工标方向 → 搜相似帧</h3><p>查询图由人放参考点，自动换成箭头、比较、排序，输出图片与集数时间。</p></div>
+<div class="panel"><span class="badge orange">已经做完对照实验</span><div id="status-model"></div><h3>从图里自动预测方向</h3><p>两条模型路线与三档标注量已训练、核验；现有证据不支持立即剔除关键点路线。</p></div>
+<div class="panel outline"><span class="badge">尚待证明</span><div id="status-future"></div><h3>更广的图，更好的实际搜索</h3><p>后腿标注质量、独立镜头表现与最终检索效果，仍需进一步验证。</p></div>
+</figure>
+<p class="takeaway">项目要解决的是“按姿势找画面”；AI 的价值，是减少准备和查询时的人工工作。</p>
+<p class="hint">当前资料围绕暮光闪闪独角兽形态、第 1 季第 15／24 集。还不是覆盖任意角色、任意视频的一键系统。</p>
+<details><summary>如果现在就想使用，要走哪条路？</summary><p>打开项目的 <code>run_m10.bat</code> 控制中心，选择角色、剧集和搜索范围。先用 M07 为查询图放参考点，再生成方向；M08 计算与样本的相似度，M09 生成结果网页。可搜索已处理的两集，当前默认向量版本为 v1。</p><p>实验成果保存在独立实验目录，没有把所有待审 AI 标注直接覆盖进正式标注，也没有把实验模型替换成默认生产流程。直接方向模型训练成功，和完整自动化工具已经可靠可用，是两种不同的完成状态。</p></details>
+</section>
+
+<section class="chapter" id="evidence">
+<div class="chapter-head"><span class="chapter-no">↗</span><h2>想继续看，可从这里进入。</h2></div>
+<div class="sources"><div><h3>使用与结果</h3><a href="../../README_FOR_USERS.md">项目用户指南</a><a href="../../experiments/direction_scaling_20261009/annotation-review.html">本轮 200 张新增标注：逐张预览</a><a href="../../开发/验证记录-2026-10-09-三档标注规模对照.md">完整实验记录与限制</a><a href="../../experiments/direction_scaling_20261009/learning-curve.pdf">完整学习曲线 PDF</a></div><div><h3>实现依据</h3><a href="../annotation_conventions.md">标注约定</a><a href="../../scripts/common/pose_vector_utils.py">参考点怎样换算方向</a><a href="../../scripts/m08/search_similar_poses.py">评分、缺失处理与两腿对应</a><a href="../../experiments/direction_scaling_20261009/protocol.json">本轮训练前固定的比较规则</a></div></div>
+<details><summary>页面里的图和数字从哪里来？</summary><p>角色图取自项目已有的第 15 集 00:20、00:24 与 18:13 帧；点和方向取自本轮 AI 待审标注。第一屏配对是讲解示例，不是一次正式全库检索结果。尾巴、腿根、遮挡、两腿对应、训练回路与权重交互是明确标注的机制示意。</p><p>实验曲线和部位统计直接读取 <code>experiments/direction_scaling_20261009/summary.json</code>，对应 2026-10-09 完成的 18 次训练。页面于 2026-10-10 整理，来源指纹保存在同目录的 <a href="build-manifest.json">构建记录</a>。</p><p>图片、图表、样式与互动程序均嵌在本 HTML 中，可离线阅读。上面的补充资料链接需要仍位于原项目目录；把 HTML 单独复制走不影响正文和互动，但补充资料不会自动跟随。</p></details>
+</section>
+<footer class="footer">一份可离线阅读的项目说明 · 证据截至 2026-10-09，整理于 2026-10-10<br>阅读和演示不会修改标注、训练模型或更改检索设置。</footer>
+</main>
+<script id="project-data" type="application/json">__DATA__</script>
+<script>
+'use strict';
+const D=JSON.parse(document.getElementById('project-data').textContent);
+const $=id=>document.getElementById(id);
+const colors=['#7755a4','#7755a4','#aa6515','#aa6515',...Array(4).fill('#087d80'),...Array(6).fill('#315dae')];
+const names=['头','颈','身体','尾巴','前1上','前1下','前2上','前2下','后1上','后1中','后1下','后2上','后2中','后2下'];
+const groups=['head','head','body','body',...Array(4).fill('front'),...Array(6).fill('back')];
+let serial=0;
+function svg(content,w=360,h=250,label='解释图'){return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" role="img" aria-label="${label}">${content}</svg>`;}
+function arrow(x,y,xx,yy,c='#087d80',width=4,dash=false){const id='a'+serial++;return `<defs><marker id="${id}" markerWidth="5" markerHeight="5" refX="4.3" refY="2.5" orient="auto"><path d="M0 0L5 2.5L0 5Z" fill="${c}"/></marker></defs><path d="M${x} ${y}L${xx} ${yy}" stroke="${c}" stroke-width="${width}" ${dash?'stroke-dasharray="7 5"':''} fill="none" marker-end="url(#${id})"/>`;}
+function text(x,y,s,size=15,anchor='start',c='#242d35'){return `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" style="fill:${c}">${s}</text>`;}
+function pose(index=0,mode='directions',part='all',faded=false){const r=D.examples[index],w=r.size[0],h=r.size[1];let out='';
+ if(mode!=='skeleton')out+=`<image href="${r.image}" width="${w}" height="${h}" opacity="${mode==='image'?1:faded?.3:.62}"/>`;
+ const scale=w/360;
+ if(mode==='points'){r.points.forEach((p,i)=>{if(!p)return;out+=`<circle cx="${p[0]}" cy="${p[1]}" r="${5*scale}" fill="#fffdf9" stroke="#7755a4" stroke-width="${2*scale}"/>`;});}
+ if(mode==='directions'||mode==='skeleton'){D.edges.forEach(([a,b],i)=>{const p=r.points[a],q=r.points[b];if(!p||!q)return;const opacity=part==='all'||groups[i]===part?1:.15;out+=`<g opacity="${opacity}">`+arrow(p[0],p[1],q[0],q[1],colors[i],3.2*scale)+`<circle cx="${p[0]}" cy="${p[1]}" r="${3*scale}" fill="${colors[i]}" stroke="white" stroke-width="${scale}"/></g>`;});}
+ return svg(out,w,h,mode==='image'?'裁剪后的暮光闪闪':mode==='points'?'同一张图片上的21个参考点':'同一姿势的14个方向箭头');}
+function miniGrid(index=0){let s='';const r=D.examples[index];D.edges.forEach(([a,b],i)=>{const p=r.points[a],q=r.points[b];if(!p||!q)return;let dx=q[0]-p[0],dy=q[1]-p[1],l=Math.hypot(dx,dy);dx/=l;dy/=l;const x=37+(i%4)*74,y=34+Math.floor(i/4)*55;s+=arrow(x-dx*13,y-dy*13,x+dx*13,y+dy*13,colors[i],2.5);});return svg(s,298,220,'同样长度的方向箭头');}
+$('hero-query').innerHTML=pose(0,'directions');$('hero-directions').innerHTML=pose(0,'skeleton');$('hero-result').innerHTML=pose(1,'directions');
+const [x1,y1,x2,y2]=D.bbox;
+$('full-frame').innerHTML=svg(`<image href="${D.frame}" width="1920" height="1080"/><rect x="${x1}" y="${y1}" width="${x2-x1}" height="${y2-y1}" fill="none" stroke="#fffdf9" stroke-width="16"/><rect x="${x1}" y="${y1}" width="${x2-x1}" height="${y2-y1}" fill="none" stroke="#087d80" stroke-width="8"/>`,1920,1080,'原始画面中暮光闪闪被矩形框住，其他角色和背景在框外');
+$('crop-example').innerHTML=pose(0,'image');
+let mode='directions',part='all';
+function inspect(){ $('pose-inspector').innerHTML=pose(0,mode,part);$('direction-grid').innerHTML=D.edges.map(([a,b],i)=>{const p=D.examples[0].points[a],q=D.examples[0].points[b];let dx=q[0]-p[0],dy=q[1]-p[1],l=Math.hypot(dx,dy);dx/=l;dy/=l;return `<div class="direction-cell ${part!=='all'&&groups[i]!==part?'dim':''}">${svg(arrow(30-dx*15,27-dy*15,30+dx*15,27+dy*15,colors[i],2.5),60,55)}<span>${names[i]}</span></div>`}).join('');$('part-description').textContent={all:'头、颈、身体、尾巴各 1 段；两条前腿各 2 段，两条后腿各 3 段。',head:'头：头中心 → 朝向参考点。颈：前躯中心 → 颈部方向参考点。',body:'身体：前躯中心 → 后躯中心。尾巴：尾根 → 向外伸出的初始朝向。',front:'每条前腿：腿根 → 中间点 → 末端，共两段。两条腿共四段。',back:'每条后腿：腿根 → 膝部 → 中间点 → 末端，共三段。两条腿共六段。'}[part];}
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.view;document.querySelectorAll('[data-view]').forEach(x=>x.setAttribute('aria-pressed',x===b));inspect();}));
+document.querySelectorAll('[data-part]').forEach(b=>b.addEventListener('click',()=>{part=b.dataset.part;document.querySelectorAll('[data-part]').forEach(x=>x.setAttribute('aria-pressed',x===b));inspect();}));inspect();
+function norm(){const l=+$('length').value,shift=+$('shift').value;const x=58+shift,y=58,xx=x+.6*l,yy=y+.8*l;let grid='';for(let i=20;i<350;i+=25)grid+=`<path d="M${i} 20V190" stroke="#e4e8e0"/>`;for(let i=20;i<200;i+=25)grid+=`<path d="M20 ${i}H345" stroke="#e4e8e0"/>`;$('normalize-before').innerHTML=svg(grid+arrow(x,y,xx,yy)+`<circle cx="${x}" cy="${y}" r="6" fill="#7755a4"/><circle cx="${xx}" cy="${yy}" r="6" fill="#7755a4"/>`+text(x-10,y-16,'起点',15)+text(xx+10,yy+7,'终点',15),360,210,'移动两点和改变距离，但保持右下方相同方向');$('length-value').value=l;$('shift-value').value=shift;}
+$('normalize-after').innerHTML=svg(`<circle cx="156" cy="111" r="76" stroke="#d9ded5" fill="none" stroke-dasharray="4 5"/><path d="M70 111H258M156 24V202" stroke="#cbd3ca"/>`+arrow(156,111,201.6,171.8)+text(255,133,'右',14)+text(131,210,'下',14),360,230,'长度统一为1的右下方向箭头');['length','shift'].forEach(id=>$(id).addEventListener('input',norm));norm();
+function setAngle(){const deg=+$('angle').value,a=deg*Math.PI/180,cx=170,cy=165,r=107,x=cx+Math.cos(a)*r,y=cy-Math.sin(a)*r;const arc=deg===0?'':`<path d="M${cx+45} ${cy} A45 45 0 0 0 ${cx+Math.cos(a)*45} ${cy-Math.sin(a)*45}" fill="none" stroke="#aa6515" stroke-width="2"/>`;$('angle-figure').innerHTML=svg(`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#e2e6de" stroke-dasharray="4 5"/>`+arrow(cx,cy,cx+r,cy,'#7755a4',4,true)+arrow(cx,cy,x,y)+arc+text(175,214,`${deg}°`,20,'middle','#aa6515'),360,295,'查询箭头和候选箭头的夹角');$('angle-score').value=((Math.cos(a)+1)/2).toFixed(2);$('angle-value').value=deg+'°';}
+$('angle').addEventListener('input',setAngle);document.querySelectorAll('[data-angle]').forEach(b=>b.addEventListener('click',()=>{$('angle').value=b.dataset.angle;setAngle();}));setAngle();
+function pairFigure(head,leg){const d=[head,leg];return svg(d.map((a,i)=>{const x=80+i*170,y=73,rad=a*Math.PI/180;return arrow(x,y,x+43,y,'#9ca5a4',2,true)+arrow(x,y,x+Math.cos(rad)*43,y-Math.sin(rad)*43,i?'#087d80':'#7755a4',3)+text(x,120,i?'腿':'头',16,'middle')+text(x,141,`${a}° 偏差`,13,'middle');}).join(''),330,160,'头和腿相对于目标箭头的偏差');}
+$('weight-a').innerHTML=pairFigure(0,90);$('weight-b').innerHTML=pairFigure(60,0);
+function weights(){const t=+$('leg-weight').value/100,a=(1-t)+.5*t,b=.75*(1-t)+t;$('leg-weight-value').value=Math.round(t*100)+'%';$('weight-score-a').textContent=a.toFixed(2);$('weight-score-b').textContent=b.toFixed(2);$('weight-bar-a').style.width=a*100+'%';$('weight-bar-b').style.width=b*100+'%';$('weight-winner').textContent=Math.abs(a-b)<.00001?'现在 A、B 分数相同。':`现在 ${a>b?'A':'B'} 排在前面。剩余的 ${100-Math.round(t*100)}% 权重给头部。`;}
+$('leg-weight').addEventListener('input',weights);weights();
+$('occlusion-source').innerHTML=svg(`<path d="M106 26Q165 4 217 32L210 86L182 119L170 207L138 207L150 113L121 87Z" fill="#e0d4e9"/>`+arrow(159,70,169,124,'#087d80',5)+`<circle cx="159" cy="70" r="6" fill="#7755a4"/><circle cx="169" cy="124" r="6" fill="#7755a4"/><rect x="80" y="142" width="210" height="77" rx="5" fill="#d3dbd2"/><path d="M88 175H280M88 186H280M88 197H280" stroke="#b6c3b5"/>`+text(212,82,'看得见',16)+text(150,188,'遮挡物',17)+text(65,242,'末端：留空',15),360,255,'腿的上段可见，下段被遮挡物盖住');
+$('occlusion-out').innerHTML=svg(text(70,38,'v1 · 整腿放弃',17)+text(220,38,'v2 · 保留上段',17)+arrow(111,75,121,133,'#bcc4bc',5,true)+arrow(121,133,100,201,'#bcc4bc',5,true)+text(115,235,'均不参与',15,'middle')+arrow(256,75,266,133,'#087d80',5)+arrow(266,133,245,201,'#bcc4bc',5,true)+text(270,235,'上段仍参与',15,'middle'),360,255,'旧版丢弃整条腿，新版保留上段方向');
+$('leg-assignment').innerHTML=svg(text(47,29,'查询',16)+text(238,29,'候选',16)+`<path d="M72 70L82 105L61 140M72 175L55 204L73 228" fill="none" stroke="#7755a4" stroke-width="5"/><path d="M265 70L248 99L266 123M265 174L275 209L254 244" fill="none" stroke="#087d80" stroke-width="5"/>`+arrow(106,102,233,207,'#65726d',2)+arrow(104,202,232,99,'#65726d',2)+text(35,102,'1',16)+text(35,204,'2',16)+text(292,102,'1',16)+text(292,211,'2',16),360,265,'查询第一条腿对应候选第二条腿，查询第二条腿对应候选第一条腿，两条腿整体交换');
+$('missing-score').innerHTML=svg(text(42,36,'查询',16)+text(185,36,'候选',16)+text(311,36,'评分',16,'middle')+text(68,98,'?',35,'middle','#a3aaa4')+arrow(190,102,230,66)+text(312,88,'跳过',17,'middle')+arrow(48,184,88,148)+text(209,186,'?',35,'middle','#a3aaa4')+text(312,176,'降分',17,'middle','#aa6515')+`<path d="M23 122H339" stroke="#d7dcd8"/>`,360,219,'查询未知则跳过，候选缺失已知查询方向则降低评分');
+['route-a-image','route-b-image','train-image'].forEach(id=>$(id).innerHTML=pose(0,'image'));$('route-a-points').innerHTML=pose(0,'points','all',true);['route-a-arrows','route-b-arrows'].forEach(id=>$(id).innerHTML=miniGrid());
+const routeNumbers=['head','neck','body'].map((key,i)=>text(45,64+i*35,['头','颈','身体'][i]+'  ['+D.examples[0].directions[key].vector.map(v=>v.toFixed(2)).join(', ')+']',17)).join('');
+$('route-b-numbers').innerHTML=svg(`<rect x="20" y="22" width="240" height="172" rx="12" fill="#edf1e9"/>`+routeNumbers+text(45,169,'… 共 14 组方向',16),280,220,'模型直接输出每段方向的两个数字');
+[0,1,2].forEach(i=>$('diversity-'+i).innerHTML=pose(i,'image'));
+$('training-error').innerHTML=svg(arrow(145,170,247,170,'#7755a4',4,true)+arrow(145,170,211,91,'#aa6515',4)+`<path d="M188 170A43 43 0 0 0 173 137" fill="none" stroke="#aa6515" stroke-width="2"/>`+text(181,70,'预测',17,'middle','#aa6515')+text(219,207,'参考',17,'middle','#7755a4')+text(109,128,'角度误差',16,'middle'),310,250,'模型预测与标注方向夹着一个角度，这个偏差用来纠正模型');
+$('nested-datasets').innerHTML=[103,203,303].map(n=>`<div class="split-row"><strong>${n} 张 = 32 人工 + ${n-32} AI</strong><div class="split-stack" style="width:${n/303*100}%"><span style="width:${32/n*100}%;background:var(--teal)"></span><span style="flex:1;background:var(--purple)"></span></div></div>`).join('');
+[['val-dots',4,false],['test-dots',12,false],['ai-dots',16,true]].forEach(([id,n,ai])=>$(id).innerHTML=Array(n).fill(`<i class="data-dot ${ai?'ai':''}" aria-hidden="true"></i>`).join(''));
+function result(selection){$('learning-chart-mobile').srcset=D.mobileCharts[selection];$('learning-chart').src=D.charts[selection];const rows=D.results.filter(r=>r.selection===selection&&r.split==='test');$('results-table').innerHTML=[103,203,303].map(n=>`<tr><td>${n} 张</td>${['keypoint_heatmap','direct_vector'].map(a=>{const r=rows.find(r=>r.train_images===n&&r.arm===a);return `<td>${r.mae_deg.toFixed(2)} ± ${r.seed_sd.toFixed(2)}</td>`;}).join('')}</tr>`).join('');$('results-takeaway').textContent=selection==='best'?'303 张时，两条路线的平均误差较低；203 张没有整体改善，直接预测方向仍未超过关键点路线。':'统一训练结束时，关键点误差从 15.91° 增到 16.44°；直接方向从 19.09° 降到 17.77°。结论随保存时点有所变化。';}
+document.querySelectorAll('[data-selection]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-selection]').forEach(x=>x.setAttribute('aria-pressed',x===b));result(b.dataset.selection);}));result('best');
+$('component-chart').innerHTML=['keypoint_heatmap','direct_vector'].map(a=>{const rows=D.results.filter(r=>r.selection==='best'&&r.split==='test'&&r.arm===a);const before=rows.find(r=>r.train_images===103),after=rows.find(r=>r.train_images===303);return `<div><h3 style="margin-top:16px">${a==='keypoint_heatmap'?'关键点 → 方向':'直接预测方向'}</h3>`+[['head','头部'],['back','后腿']].map(([k,label])=>`<div class="component-row"><b>${label}</b>${[[before,false],[after,true]].map(([r,newer])=>`<div class="component-bars ${newer?'after':''} ${after.components[k]>before.components[k]?'worse':''}"><span>${r.train_images} 张</span><div class="track"><i style="width:${r.components[k]/45*100}%"></i></div><span>${r.components[k].toFixed(2)}°</span></div>`).join('')}</div>`).join('')+'</div>';}).join('');
+$('status-search').innerHTML=svg(`<rect x="14" y="30" width="91" height="77" rx="6" fill="#ede4f4"/><rect x="188" y="24" width="106" height="91" rx="6" fill="#edf1e9"/>`+arrow(45,55,64,82,'#087d80',3)+arrow(112,69,169,69,'#65726d',2)+arrow(204,45,222,72,'#087d80',3)+text(242,98,'00:24',15,'middle'),310,137,'目标箭头对应到带时间的结果卡片');
+$('status-model').innerHTML=svg(arrow(50,100,81,48,'#7755a4',4)+arrow(170,100,213,50,'#087d80',4)+text(58,127,'找点后换算',13,'middle')+text(214,127,'直接给方向',13,'middle')+text(137,68,'vs',21,'middle'),310,137,'两条路线对照');
+$('status-future').innerHTML=svg(`<rect x="32" y="21" width="76" height="58" rx="5" fill="none" stroke="#8e9b94" stroke-dasharray="5 4"/><rect x="125" y="48" width="76" height="58" rx="5" fill="none" stroke="#8e9b94" stroke-dasharray="5 4"/><rect x="218" y="21" width="76" height="58" rx="5" fill="none" stroke="#8e9b94" stroke-dasharray="5 4"/>`+text(70,61,'?',27,'middle')+text(163,87,'?',27,'middle')+text(256,61,'?',27,'middle'),310,137,'尚待检验的新镜头与新图片');
+</script>
+</body>
+</html>

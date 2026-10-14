@@ -1,0 +1,107 @@
+{
+  "version": "keypoint_schemas_v1",
+  "schemas": {
+    "pony_unicorn_no_wings_mvp0_v1": {
+      "keypoint_rules": {
+        "head": ["head_center", "head_front", "neck"],
+        "body": ["body_1", "body_2"],
+        "front_legs": ["front_leg_1", "front_leg_2"],
+        "back_legs": ["back_leg_1", "back_leg_2"],
+        "tail": ["tail_base", "tail_end"]
+      },
+      "leg_keypoint_rules": {
+        "front_legs": ["mid", "end"],
+        "back_legs": ["mid", "end"]
+      },
+      "vector_rules": {
+        "head_direction": { "from": "head.head_center", "to": "head.head_front" },
+        "neck_direction": { "from": "body.body_1", "to": "head.neck" },
+        "body_direction": { "from": "body.body_1", "to": "body.body_2" },
+        "tail_direction": { "from": "tail.tail_base", "to": "tail.tail_end" },
+        "front_legs": {
+          "source_group": "front_legs",
+          "anchor_keypoint": "body.body_1",
+          "direction1": { "name": "leg_direction1", "from": "anchor_keypoint", "to": "current_leg.mid" },
+          "direction2": { "name": "leg_direction2", "from": "current_leg.mid", "to": "current_leg.end" },
+          "direction_weights": { "leg_direction1": 0.5, "leg_direction2": 0.5 },
+          "unordered_group": true
+        },
+        "back_legs": {
+          "source_group": "back_legs",
+          "anchor_keypoint": "body.body_2",
+          "direction1": { "name": "leg_direction1", "from": "anchor_keypoint", "to": "current_leg.mid" },
+          "direction2": { "name": "leg_direction2", "from": "current_leg.mid", "to": "current_leg.end" },
+          "direction_weights": { "leg_direction1": 0.5, "leg_direction2": 0.5 },
+          "unordered_group": true
+        }
+      }
+    },
+    "pony_unicorn_no_wings_mvp0_v2": {
+      "keypoint_rules": {
+        "head": ["head_center", "head_front", "neck"],
+        "body": ["body_1", "body_2"],
+        "front_legs": ["front_leg_1", "front_leg_2"],
+        "back_legs": ["back_leg_1", "back_leg_2"],
+        "tail": ["tail_base", "tail_end"]
+      },
+      "leg_keypoint_rules": {
+        "front_legs": ["base", "mid", "end"],
+        "back_legs": ["base", "mid", "end"]
+      },
+      "vector_rules": {
+        "head_direction": { "from": "head.head_center", "to": "head.head_front" },
+        "neck_direction": { "from": "body.body_1", "to": "head.neck" },
+        "body_direction": { "from": "body.body_1", "to": "body.body_2" },
+        "tail_direction": { "from": "tail.tail_base", "to": "tail.tail_end" },
+        "front_legs": {
+          "source_group": "front_legs",
+          "direction1": { "name": "leg_direction1", "from": "current_leg.base", "to": "current_leg.mid" },
+          "direction2": { "name": "leg_direction2", "from": "current_leg.mid", "to": "current_leg.end" },
+          "direction_weights": { "leg_direction1": 0.5, "leg_direction2": 0.5 },
+          "unordered_group": true
+        },
+        "back_legs": {
+          "source_group": "back_legs",
+          "direction1": { "name": "leg_direction1", "from": "current_leg.base", "to": "current_leg.mid" },
+          "direction2": { "name": "leg_direction2", "from": "current_leg.mid", "to": "current_leg.end" },
+          "direction_weights": { "leg_direction1": 0.5, "leg_direction2": 0.5 },
+          "unordered_group": true
+        }
+      }
+    },
+    "pony_unicorn_no_wings_mvp0_v3": {
+      "keypoint_rules": {
+        "head": ["head_center", "head_front", "neck"],
+        "body": ["body_1", "body_2"],
+        "front_legs": ["front_leg_1", "front_leg_2"],
+        "back_legs": ["back_leg_1", "back_leg_2"],
+        "tail": ["tail_base", "tail_end"]
+      },
+      "leg_keypoint_rules": {
+        "front_legs": ["base", "mid", "end"],
+        "back_legs": ["base", "knee", "mid", "end"]
+      },
+      "vector_rules": {
+        "head_direction": { "from": "head.head_center", "to": "head.head_front" },
+        "neck_direction": { "from": "body.body_1", "to": "head.neck" },
+        "body_direction": { "from": "body.body_1", "to": "body.body_2" },
+        "tail_direction": { "from": "tail.tail_base", "to": "tail.tail_end" },
+        "front_legs": {
+          "source_group": "front_legs",
+          "direction1": { "name": "leg_direction1", "from": "current_leg.base", "to": "current_leg.mid" },
+          "direction2": { "name": "leg_direction2", "from": "current_leg.mid", "to": "current_leg.end" },
+          "direction_weights": { "leg_direction1": 0.5, "leg_direction2": 0.5 },
+          "unordered_group": true
+        },
+        "back_legs": {
+          "source_group": "back_legs",
+          "direction1": { "name": "leg_direction1", "from": "current_leg.base", "to": "current_leg.knee" },
+          "direction2": { "name": "leg_direction2", "from": "current_leg.knee", "to": "current_leg.mid" },
+          "direction3": { "name": "leg_direction3", "from": "current_leg.mid", "to": "current_leg.end" },
+          "direction_weights": { "leg_direction1": 0.4, "leg_direction2": 0.2, "leg_direction3": 0.4 },
+          "unordered_group": true
+        }
+      }
+    }
+  }
+}

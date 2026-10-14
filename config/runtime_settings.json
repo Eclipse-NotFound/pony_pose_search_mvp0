@@ -1,0 +1,22 @@
+{
+  "version": "runtime_settings_v1",
+  "m08": {
+    "top_n": 15,
+    "part_weights": {
+      "head": 0.6,
+      "neck": 1.0,
+      "body": 0.6,
+      "tail": 0.1,
+      "front_legs": 1.5,
+      "back_legs": 2.0
+    },
+    "direction_weight_overrides": {
+      "back_legs": {
+        "leg_direction1": 0.4,
+        "leg_direction2": 0.2,
+        "leg_direction3": 0.4
+      }
+    },
+    "sample_missing_penalty": 0.9044117647058824
+  }
+}
